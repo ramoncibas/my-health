@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ouvidaria 24h</ion-title>
+    <ion-button [routerLink]="['/home']" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Algum problema?</ion-card-subtitle>
+      <ion-card-title>Entre em contato</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="../../../assets/img/contactus.svg">
+      Formas de contato
+      <ion-button (click)="presentActionSheet()" expand="block">
+        Contate-nos
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Precisando de ajuda?</ion-card-subtitle>
+      <ion-card-title>Chat Box</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="../../../assets/img/chat.svg">
+      Atendentes disponiveis
+      <ion-button (click)="presentModal()" expand="block">Abrir um chamado</ion-button>
+    </ion-card-content>
+  </ion-card>  
+</ion-content>

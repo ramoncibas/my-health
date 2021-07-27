@@ -1,0 +1,29 @@
+.container {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 11%;
+  margin-top: 10px;
+
+  box-shadow: var(--ion-box-shadow-container);
+
+  border-radius: 10px;  
+
+  ion-list {
+    border-radius: 10px;
+
+    ion-item {
+      --border-color: rgba(0, 0, 0, 0.125);
+      --border-width: 1px;
+      --border-style: solid;
+      --border-radius: 10px;
+      --padding-top: 5%;
+      --padding-bottom: 5%;
+      box-shadow: var(--ion-box-shadow);
+
+      &~ion-item {
+        margin-top: 10px;
+      }
+    }
+  }
+}

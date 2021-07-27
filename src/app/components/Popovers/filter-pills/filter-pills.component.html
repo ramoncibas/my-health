@@ -1,0 +1,79 @@
+<ion-list class="ion-no-padding">
+  <ion-list-header>
+    <h4>Filtre os Medicamentos</h4>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>
+      <h4>Nome:</h4>
+
+      <ion-chip *ngIf="pillName">
+        <ion-label>{{ pillName }}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+    </ion-label>
+
+    <ion-select ngDefaultControl [(ngModel)]="pillName" (ionChange)="setPillName($event)">
+      <ion-select-option *ngFor="let item of data" [value]="item.value">{{ item.name }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <div class="container range">
+      <ion-label>Valor:</ion-label>
+
+      <ion-range
+        min="0"
+        max="1000"
+        dualKnobs="true"
+        pin="true"
+        snaps="true"
+        step="10"
+        ticks="true"
+        [value]="price"
+        color="dark"
+        ngDefaultControl
+        [(ngModel)]="price"
+        (ionChange)="setPrice($event)"
+      >
+      </ion-range>
+
+      <ion-chip *ngIf="price">
+        <ion-icon name="cash"></ion-icon>
+        <ion-label>até R$: {{ price }}</ion-label>
+      </ion-chip>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <div class="container amount">
+    <ion-label>Quantidade:</ion-label>
+    <ion-range
+      min="0"
+      max="10"
+      dualKnobs="true"
+      pin="true"
+      snaps="true"
+      step="1"
+      ticks="true"
+      value="0"
+      color="dark"
+      ngDefaultControl
+      [(ngModel)]="amount"
+      (ionChange)="setAmount($event)"
+    >
+    </ion-range>
+
+    <ion-chip *ngIf="amount">
+      <ion-label>{{ "Quantidade: " + amount }}</ion-label>
+      <ion-icon name="close"></ion-icon>
+    </ion-chip>
+    </div>
+  </ion-item>
+
+  <ion-buttons class="ion-justify-content-center">
+    <ion-button (click)="closePopover()" color="danger"> Cancelar </ion-button>
+
+    <ion-button (click)="setFilter()" color="success"> Confirmar </ion-button>
+  </ion-buttons>
+</ion-list>

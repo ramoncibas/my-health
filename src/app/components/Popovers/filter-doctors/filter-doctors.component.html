@@ -1,0 +1,52 @@
+<ion-list class="ion-no-padding">
+  <ion-list-header>
+    <h4>Filtre os Resultados</h4>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>
+      <h4>Especialidade</h4>
+
+      <ion-chip *ngIf="specialty">
+        <ion-label>{{specialty}}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+    </ion-label>
+    <ion-select ngDefaultControl [(ngModel)]="specialty" (ionChange)="setSpecialty($event)">
+      <ion-select-option *ngFor="let item of data" [value]="item.value">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <h4>Valor da consulta</h4>
+
+      <ion-chip *ngIf="price">
+        <ion-icon name="cash"></ion-icon>
+        <ion-label>{{price.length >= 2 ? price[0] +' a '+ price[1] : price}}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+    </ion-label>
+    <ion-select ngDefaultControl [(ngModel)]="price" (ionChange)="setPrice($event)" multiple="true">
+      <ion-select-option *ngFor="let item of dataPrice" [value]="item">{{item}}</ion-select-option>
+    </ion-select>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Dia da consulta</ion-label>
+    <ion-datetime ngDefaultControl [(ngModel)]="date" (ionChange)="setDate($event)" display-format="DD/MM/YYYY"
+      display-timezone="utc" min="2021" max="2021"></ion-datetime>
+  </ion-item>
+
+  <ion-buttons class="ion-justify-content-center">
+    <ion-button (click)="closePopover()" color="danger">
+      Cancelar
+    </ion-button>
+
+    <ion-button (click)="setFilter()" color="success">
+      Confirmar
+    </ion-button>
+  </ion-buttons>
+
+</ion-list>

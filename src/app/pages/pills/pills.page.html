@@ -1,0 +1,23 @@
+<div class="pills-background">
+  <ion-button [routerLink]="['/home']" fill="clear" class="backbtn">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+  </ion-button>
+
+  <div class="pills">
+    <img src="/assets/img/pills.png" />
+    <h4>Medicamentos</h4>
+  </div>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar por Medicamentos" [disabled]="pills.length ? false : true"
+      (ionInput)="searchByName($event)" [debounce]="250" showCancelButton="focus"></ion-searchbar>
+
+    <ion-button [disabled]="pills.length ? false : true" (click)="filterData()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="filter"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</div>
+
+<ion-content>
+  <app-list-items [data]="pills"></app-list-items>
+</ion-content>

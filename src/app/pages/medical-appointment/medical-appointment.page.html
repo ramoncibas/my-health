@@ -1,0 +1,23 @@
+<div class="appointment-background">
+  <ion-button [routerLink]="['/home']" fill="clear" class="backbtn">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+  </ion-button>
+
+  <div class="make-appointment">
+    <img src="/assets/img/home-logo.png" />
+    <h4>Agende uma consulta</h4>
+  </div>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar por Profissional" [disabled]="appointments.length ? false : true"
+      (ionInput)="searchByName($event)" [debounce]="250" showCancelButton="focus"></ion-searchbar>
+
+    <ion-button [disabled]="appointments.length ? false : true" (click)="filterData()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="filter"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</div>
+
+<ion-content>
+  <app-list-items [data]="appointments"></app-list-items>
+</ion-content>

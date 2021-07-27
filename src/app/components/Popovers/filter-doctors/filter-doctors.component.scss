@@ -1,0 +1,12 @@
+ion-chip {
+  color: #fff;
+  background-color: #15232e;
+
+  & ion-icon {
+    color: #fff;
+  }
+} 
+
+ion-select::part(text) {
+  display: none;
+}

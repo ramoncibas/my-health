@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+ion-item {
+    padding: 5px 0;
+}
+
+ion-chip {
+    color: #fff;
+    background-color: #15232e;
+
+    & ion-icon {
+        color: #fff;
+    }
+}
+
+ion-range {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+ion-select::part(text) {
+    display: none;
+}

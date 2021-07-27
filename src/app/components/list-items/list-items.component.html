@@ -1,0 +1,49 @@
+<div class="container">  
+  <ion-list *ngIf="data.length" class="ion-no-padding">
+    <ion-item *ngFor="let item of data" (click)="presentModal(item)" lines="none">
+
+      <ion-label *ngIf="item.type != 'pills'; else list_pills">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.specialty }}</p>
+        <p>{{ item.timeAvaliable }}</p>
+      </ion-label>
+
+      <ng-template #list_pills>
+        <ion-label>
+          <p style="text-decoration: line-through">R$: {{ item.lastPrice }}</p>
+          <h2 style="font-weight: 800;">R$: {{ item.price }}</h2>
+          <h2 style="font-weight: 800; text-transform: uppercase;">{{ item.name }}</h2>
+          <p>{{ item.description }}</p>
+        </ion-label>
+      </ng-template>
+
+      <ion-thumbnail slot="start">
+        <img [src]="item.picture" style="border-radius: 50%" />
+      </ion-thumbnail>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!data.length" class="ion-no-padding">
+    <ion-item *ngFor="let items of [0, 1, 2]" lines="none">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Buscando mais...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>

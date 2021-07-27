@@ -1,0 +1,20 @@
+<ion-content>
+  <div class="profile-background">
+    <ion-button [routerLink]="['/home']" fill="clear">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+
+    <div class="profile-info">
+      <img src="../../../assets/img/avatar.png" />
+      <ion-label style="text-transform: uppercase; margin-top: 10px;">{{user.displayName}}</ion-label>
+    </div>
+  </div>
+
+  <div class="container">
+    <ion-list class="appointments">            
+      <ion-button (click)="singOut()" expand="block" fill="clear">
+        Log Out
+      </ion-button>
+    </ion-list>
+  </div>
+</ion-content>

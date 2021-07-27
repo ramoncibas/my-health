@@ -1,0 +1,85 @@
+.appointment-background {
+  position: relative;
+
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+
+  ion-button {
+    position: absolute;
+
+    top: 10px;
+    left: 0;
+    color: #fff;
+    z-index: 2;
+  }
+
+  .appointment-type {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      width: 100px;
+      height: 100px;
+
+      filter: brightness(100);
+    }
+
+    h4 {
+      margin: 0;
+    }
+  }
+}
+
+.container {
+  position: absolute;
+  top: 28%;
+  left: 5%;
+  right: 5%;
+
+  box-shadow: var(--ion-box-shadow-container);
+  border-radius: 10px;
+
+  z-index: 5;
+  
+  ion-list {
+    border-radius: 10px;
+    
+    ion-item {
+      --border-color: rgba(0, 0, 0, 0.125);
+      --border-width: 1px;
+      --border-style: solid;      
+      --padding-top: 5%;
+      --padding-bottom: 5%;
+      box-shadow: var(--ion-box-shadow);
+      
+      &:first-of-type {
+        --border-radius: 10px 10px 0 0;
+      }
+      &:last-of-type {
+        --border-radius: 0 0 10px 10px;
+      }
+      &.appointment-menu {    
+        ion-icon, h2 {          
+          color: var(--ion-color-primary);
+        }
+    
+        h5 {
+          color: var(--ion-color-dark-tint);
+        }
+      }
+    }
+  }
+}

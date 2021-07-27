@@ -1,0 +1,61 @@
+.profile-background {
+    position: relative;
+  
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+  
+    ion-button {
+      position: absolute;
+  
+      top: 10px;
+      left: 0;
+      color: #fff;
+      z-index: 2;
+    }
+  
+    .profile-info {
+      width: 100%;
+      height: 100%;
+  
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  
+      color: #fff;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+      }
+  
+      h4 {
+        margin-top: 10px;
+      }
+    }
+  }
+  
+  .container {
+    position: absolute;
+    top: 38%;
+    left: 5%;
+    right: 5%;
+  
+    height: 100%;
+    box-shadow: 5px 5px 10px rgba(144, 140, 140, 0.239), 
+              -5px -5px 10px rgba(131, 130, 130, 0.239);
+    border-radius: 5px 5px 0 0;
+  
+    z-index: 5;
+    
+    & ion-list {
+      border-radius: 5px 5px 0 0;
+    }
+  }

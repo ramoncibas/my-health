@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat Box</ion-title>
+    <ion-button (click)="closeModal()" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>  
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="9" class="message other-message">
+        <b>Atendente</b><br>
+        <span>Ola, como podemos te ajuda?😃</span>
+        <div class="time ion-text-right"><br>Agora</div>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row *ngFor="let item of messages | async">
+      <ion-col size="9" class="message" [offset]="item.myMsg ? 3 : 0" [ngClass]="{ 'my-message': item.myMsg, 'other-message': !item.myMsg }">
+
+        <b>{{ !item.myMsg ? 'Atendente' : 'Eu' }}</b><br>
+        <span>{{ item.msg }}</span>
+        <div class="time ion-text-right"><br>{{ item.createdAt?.toDate().toDateString() | date:'short' }}</div>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="light">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="10">
+          <ion-textarea ngDefaultControl placeholder="Digite uma mensagem..." autoGrow="true" class="input-message" rows="1" maxlength="500" [(ngModel)]="newMsg"></ion-textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button class="msg-btn" (click)="sendMessage()" expand="block" fill="clear">
+            <ion-icon slot="icon-only" name="send"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+</ion-footer>

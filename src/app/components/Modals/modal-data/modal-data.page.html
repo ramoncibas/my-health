@@ -1,0 +1,60 @@
+<ion-content>
+  <div class="myappointment-background">
+    <div class="buttons">
+      <ion-button (click)="closeModal()" fill="clear" slot="start">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      
+      <ion-button (click)="onClick()" fill="clear" slot="end">
+        <ion-icon slot="icon-only" name="share-social"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div class="myappointment">
+      <img  [src]="data.picture" />
+      <h4>{{ data.name }}</h4>
+    </div>
+  </div>
+  <div class="container">
+    <ion-list class="ion-no-padding">
+      <ion-item lines="none">
+        <ion-label>
+          {{ 
+            data.type != 'pills'
+            ? "Tipo de consulta: " +data.description
+            : "Quantidade: " + data.description
+          }}
+        </ion-label>
+      </ion-item>
+      
+      <ion-item *ngIf="data.specialty" lines="none">
+        <ion-label>Especialidade:</ion-label>
+        <ion-select ngDefaultControl [(ngModel)]="item">          
+          <ion-select-option *ngFor="let item of data.specialty" [value]="item">{{ item }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item *ngIf="data.timeAvaliable" lines="none">
+        <ion-label>Agenda disponivel:</ion-label>
+        <ion-datetime display-format="DD.MM.YYYY HH" value="{{ data.timeAvaliable }}"></ion-datetime>
+      </ion-item>
+      
+      <ion-item lines="none">
+        <ion-label>
+          {{
+            data.type != 'pills' 
+            ? "Valor da consulta: R$"+ data.price 
+            : "Valor do medicamento: R$" + data.price
+          }}
+        </ion-label>
+      </ion-item>
+      
+      <ion-button *ngIf="data.type != 'pills'; else buy_pills" (click)="mkAppointment(data)">Agendar</ion-button>
+      <ng-template #buy_pills>
+        <ion-button (click)="buyPill(data)">Comprar</ion-button>
+      </ng-template>
+    </ion-list>
+  </div>
+  
+  
+</ion-content>

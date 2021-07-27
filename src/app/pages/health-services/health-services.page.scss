@@ -1,0 +1,29 @@
+.appointment-background {
+    position: relative;
+  
+    width: 100%;
+    height: 30%;
+  
+    background: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  
+    ion-button {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      color: #fff;
+    }
+  }
+
+  .ios, .md {
+      .scroll-content {
+        height: 100%
+      }
+  
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+  
+    
+  
+  }
