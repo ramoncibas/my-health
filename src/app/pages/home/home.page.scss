@@ -1,101 +1,114 @@
 .card-background {
-    width: 100%;
-    height: 20%;
-    background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
 }
 
 .user-card {
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 5%;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 5%;
 
-    z-index: 2;
-    width: 80%;
-    margin: 0 auto;
+  z-index: 2;
+  width: 80%;
+  margin: 0 auto;
 
-    border-radius: 10px;
-    box-shadow: inset 0 0 2px #cecece;
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px #cecece;
 
-    background: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  background: linear-gradient(to right, #144daa, var(--ion-color-primary));
 
-    .about-user {
-        height: 100%;
+  .about-user {
+    height: 100%;
 
-        .user-information {     
-            position: relative;
-            
-            display: flex;                
-            align-content: center;
-            flex-direction: column;
+    .user-information {
+      position: relative;
 
-            margin: 5% 0;
-            
-            color: #fff;
+      display: flex;
+      align-content: center;
+      flex-direction: column;
 
-            ion-label {
-                text-transform: uppercase;
-            }
-    
-            span {
-                max-width: 200px;
-                text-overflow: ellipsis; 
-                white-space: nowrap; 
-                overflow: hidden;
+      margin: 5% 0;
 
-                font-size: 9pt;
+      color: #fff;
 
-                strong {
-                    text-transform: uppercase;
-                }
-                
-            }
+      ion-label {
+        text-transform: uppercase;
+      }
 
-            ion-button {
-                position: absolute;
-                right: 0;
-                bottom: -5px;
+      span {
+        max-width: 200px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
 
-                color: #fff;
-            }            
+        font-size: 9pt;
+
+        strong {
+          text-transform: uppercase;
         }
+
+      }
+
+      ion-button {
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+
+        color: #fff;
+      }
     }
+  }
 }
 
 .container {
-    width: 100vw;
+  width: 100vw;
+  padding-top: 20%;
 
-    padding-top: 20%;
+  ion-grid {
+    --ion-grid-padding: 0;
 
-    ion-grid {
-        --ion-grid-padding: 0;
+    ion-col {      
+      border: 1px solid #cecece;
+      border-radius: 7px;
+      margin-bottom: 5px;
+
+      &:nth-child(odd) {
+        margin-right: 5px;
+      }
     }
 
-    .health {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        margin: 10px 0;
-
-        text-align: center;
-
-        img {
-            width: 50px;
-            height: 50px;
-
-            margin: 10px 0;            
-        }
-
-        ion-label {
-            font-size: 10pt;
-        }
-
-        span {
-            font-size: 8pt;            
-            color: var(--ion-color-dark-tint);
-            margin-top: 5px;
-        }
+    ion-col:hover {
+      background: #dcdcdc2c
     }
+  }
+
+  .health {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 10px 0;
+
+    text-align: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+
+      margin: 10px 0;
+    }
+
+    ion-label {
+      font-size: 10pt;
+    }
+
+    span {
+      font-size: 8pt;
+      color: var(--ion-color-dark-tint);
+      margin-top: 5px;
+    }
+  }
 }
