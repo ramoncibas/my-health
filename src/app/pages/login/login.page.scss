@@ -1,87 +1,87 @@
 .container {
-    position: absolute;
-    left: 0;
-    right: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
 
-    width: 75%;
-    margin: 0 auto;
+  width: 75%;
+  margin: 0 auto;
 
-    z-index: 2;
+  z-index: 2;
 
-    &.top  {        
-        top: 3%;
+  &.top {
+    top: 3%;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-        img {
-            width: 40%;
-            height: 40%;
-            
-            margin-bottom: 5%;
-        }
+    img {
+      width: 40%;
+      height: 40%;
+
+      margin-bottom: 5%;
     }
+  }
 
-    &.bottom {
-        bottom: 15%;
+  &.bottom {
+    bottom: 15%;
 
-        span {    
-            color: #c5c5c57e;
-        }
+    span {
+      color: #c5c5c57e;
     }
+  }
 }
 
 ion-slides {
-    height: 100%;
+  height: 100%;
 
-    .slide-inner {      
-        width: 75%;
-        margin-top: 20%;
+  .slide-inner {
+    width: 75%;
+    margin-top: 20%;
 
-        background-color: var(--ion-color-primary);
-        
-        color: #fff;
-        border-radius: 10px;
+    background-color: var(--ion-color-primary);
 
-        ion-item {
-            --background: rgba(255,255,255,0.2);
-            --border-radius: 10px;
+    color: #fff;
+    border-radius: 10px;
 
-            ion-input {
-                --color: #fff;
-            }
-        }
+    ion-item {
+      --background: rgba(255, 255, 255, 0.2);
+      --border-radius: 10px;
 
-        ion-button {
-            ion-label {
-                color: #fff;
-            }
-        }
+      ion-input {
+        --color: #fff;
+      }
     }
+
+    ion-button {
+      ion-label {
+        color: #fff;
+      }
+    }
+  }
 }
 
 .background-waves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+
+  background: #17315d;
+
+  .waves {
     position: absolute;
+    top: -85px;
     left: 0;
     right: 0;
-    bottom: 0;
-    height: 45%;
 
-    background: #17315d;
+    height: 100px;
+    background-image: url('/assets/img/background-login-img.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 
-    .waves {
-        position: absolute;
-        top: -85px;
-        left: 0;
-        right: 0;
-        
-        height: 100px;        
-        background-image: url('/assets/img/background-login-img.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        transition: all 0.5s;
-    }    
+    transition: all 0.5s;
+  }
 }

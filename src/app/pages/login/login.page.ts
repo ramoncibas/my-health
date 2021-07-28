@@ -43,17 +43,18 @@ export class LoginPage implements OnInit {
     await this.presentLoading();
 
     try {
+      this.authServices.currentUser = null;
       await this.authServices.signIn(this.userLogin);
     } catch (error) {
       // Pegando erro
       let message: string;
       switch (error.code) {
         case 'auth/invalid-email':
-          message = 'E-mail ou Senha incorreto!'
+          message = 'E-mail incorreto!'
           break;
 
         case 'auth/wrong-password':
-          message = 'E-mail ou Senha incorreto!'
+          message = 'Senha incorreta!'
           break;
 
         case 'auth/user-not-found':
