@@ -60,10 +60,16 @@
     width: 100%;
     --border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
+    margin-left: -1px;
   }
 
   & ion-list {
     border-radius: 10px;
+    padding: 0 10px;
+    
+    ion-item-sliding:last-of-type {
+      margin-bottom: 10px;
+    }
     
     ion-item-sliding ~ ion-item-sliding {
       margin-top: 10px;
