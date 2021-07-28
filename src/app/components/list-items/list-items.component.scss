@@ -1,16 +1,16 @@
 .container {
   position: absolute;
-  left: 2%;
-  right: 2%;
+  left: 0;
+  right: 0;
   top: 11%;
   margin-top: 10px;
-
-  box-shadow: var(--ion-box-shadow-container);
+  // box-shadow: var(--ion-box-shadow-container);
 
   border-radius: 10px;  
 
   ion-list {
     border-radius: 10px;
+    padding: 10px;
 
     ion-item {
       --border-color: rgba(0, 0, 0, 0.125);
