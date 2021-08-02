@@ -1,13 +1,10 @@
+// Quando o usuario for fazer uma consulta, registre em appointment
 export interface Appointment {
-    id?: string;
-    doctorId?: string;
-    specialty?: string;
-    description?: string;
-
-    // When the user makes an appointment
-    userId?: string;
-    healthInsurance?: boolean;
-    price?: string;
-    createdAt?: number;
-    dayAt?: number;
+    uid?: string;
+    userUid: string;
+    doctorUid: string;
+    specialty: string;
+    price: string;
+    dayAt: any;
+    createdAt: string;
 }
