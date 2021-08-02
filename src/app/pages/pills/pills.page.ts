@@ -2,8 +2,11 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { PopoverController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { Pills } from 'src/app/interfaces/pills';
+import { PillService } from 'src/app/services/pill.service';
 
+import { PopoverController } from '@ionic/angular';
 import { ListItemsComponent } from 'src/app/components/list-items/list-items.component';
 import { FilterPillsComponent } from 'src/app/components/Popovers/filter-pills/filter-pills.component';
 
@@ -22,37 +25,24 @@ import { FilterPillsComponent } from 'src/app/components/Popovers/filter-pills/f
 })
 export class PillsPage implements OnInit {
 
-  private pills = [
-    {
-      name: 'Paracetamol 750mg',
-      description: '20 comprimidos',
-      price: '12,99',
-      lastPrice: '15,99',
-      picture: 'https://img.drogaraia.com.br/catalog/product/p/a/paracetamol-750mg-com-20-comprimidos-prati-donaduzzi.jpg?width=520&height=520&quality=50&type=resize',
-      type: 'pills'
-    },
-    {
-      name: 'Diporona 75mg',
-      description: '20 comprimidos',
-      price: '12,99',
-      lastPrice: '15,99',
-      picture: 'https://img.drogaraia.com.br/catalog/product/p/a/paracetamol-750mg-com-20-comprimidos-prati-donaduzzi.jpg?width=520&height=520&quality=50&type=resize',
-      type: 'pills'      
-    },
-    {
-      name: 'Irineu 750mg',
-      description: '20 comprimidos',
-      price: '12,99',
-      lastPrice: '15,99',
-      picture: 'https://img.drogaraia.com.br/catalog/product/p/a/paracetamol-750mg-com-20-comprimidos-prati-donaduzzi.jpg?width=520&height=520&quality=50&type=resize',
-      type: 'pills'
-    }
-  ]
+  private pills = new Array<Pills>();
+  private pillSubscription: Subscription;
+
   constructor(
-    public popoverController: PopoverController
-  ) { }
+    public popoverController: PopoverController,
+    private pillService: PillService
+  ) {
+    this.pillSubscription = this.pillService.getPills().subscribe(data => {
+      this.pills = data;
+    })
+  }
 
   ngOnInit() {}
+  
+  // Destroy listen
+  ngOnDestroy() {
+    this.pillSubscription.unsubscribe();
+  }
 
   // Filter by name
   searchByName(event:any) {
