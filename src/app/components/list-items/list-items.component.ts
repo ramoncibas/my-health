@@ -20,18 +20,19 @@ import { FilterDoctorsComponent } from '../Popovers/filter-doctors/filter-doctor
 
 export class ListItemsComponent implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-
   @Input() data: any;
 
+  private discountPrice;
   constructor(
     private modalControll: ModalController,
     private popoverController: PopoverController
   ) { }
 
-  ngOnInit() {}  
+  ngOnInit() {}
 
   // Show Modal with options (make-appointment and show time of doctor)
   async presentModal(data) {
+    console.log(this.data) 
     const modal = await this.modalControll.create({
       component: ModalDataPage,
       cssClass: 'my-custom-class',

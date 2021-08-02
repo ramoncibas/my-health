@@ -2,16 +2,16 @@
   <ion-list *ngIf="data.length" class="ion-no-padding">
     <ion-item *ngFor="let item of data" (click)="presentModal(item)" lines="none">
 
-      <ion-label *ngIf="item.type != 'pills'; else list_pills">
+      <ion-label *ngIf="item.specialty; else list_pills">
         <h2>{{ item.name }}</h2>
         <p>{{ item.specialty }}</p>
-        <p>{{ item.timeAvaliable }}</p>
+        <p>{{ item.dayAt }}</p>
       </ion-label>
 
       <ng-template #list_pills>
         <ion-label>
-          <p style="text-decoration: line-through">R$: {{ item.lastPrice }}</p>
-          <h2 style="font-weight: 800;">R$: {{ item.price }}</h2>
+          <p *ngIf="item.promotion" style="text-decoration: line-through">R$: {{ item.price }}</p>
+          <h2 style="font-weight: 800;">R$: {{ item.price - ((item.price * item.promotion) / 100) }}</h2>
           <h2 style="font-weight: 800; text-transform: uppercase;">{{ item.name }}</h2>
           <p>{{ item.description }}</p>
         </ion-label>
