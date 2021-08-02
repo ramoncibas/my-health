@@ -11,7 +11,7 @@
     </div>
     
     <div class="myappointment">
-      <img  [src]="data.picture" />
+      <img [src]="data.picture" />
       <h4>{{ data.name }}</h4>
     </div>
   </div>
@@ -20,8 +20,8 @@
       <ion-item lines="none">
         <ion-label>
           {{ 
-            data.type != 'pills'
-            ? "Tipo de consulta: " +data.description
+            data.specialty           
+            ? "Tipo de consulta: " + data.description
             : "Quantidade: " + data.description
           }}
         </ion-label>
@@ -36,15 +36,15 @@
       
       <ion-item *ngIf="data.timeAvaliable" lines="none">
         <ion-label>Agenda disponivel:</ion-label>
-        <ion-datetime display-format="DD.MM.YYYY HH" value="{{ data.timeAvaliable }}"></ion-datetime>
+        <ion-datetime display-format="DD.MM.YYYY HH" [value]="data.timeAvaliable"></ion-datetime>
       </ion-item>
       
       <ion-item lines="none">
         <ion-label>
           {{
-            data.type != 'pills' 
-            ? "Valor da consulta: R$"+ data.price 
-            : "Valor do medicamento: R$" + data.price
+            data.specialty
+            ? "Valor da consulta: R$"+ price
+            : "Valor do medicamento: R$" + price 
           }}
         </ion-label>
       </ion-item>
