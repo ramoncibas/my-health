@@ -9,15 +9,15 @@
   </div>
 
   <ion-toolbar>
-    <ion-searchbar placeholder="Buscar por Profissional" [disabled]="appointments.length ? false : true"
+    <ion-searchbar placeholder="Buscar por Profissional" [disabled]="doctors.length ? false : true"
       (ionInput)="searchByName($event)" [debounce]="250" showCancelButton="focus"></ion-searchbar>
 
-    <ion-button [disabled]="appointments.length ? false : true" (click)="filterData()" slot="end" fill="clear">
+    <ion-button [disabled]="doctors.length ? false : true" (click)="filterData()" slot="end" fill="clear">
       <ion-icon slot="icon-only" name="filter"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </div>
 
 <ion-content>
-  <app-list-items [data]="appointments"></app-list-items>
+  <app-list-items [data]="doctors"></app-list-items>
 </ion-content>
