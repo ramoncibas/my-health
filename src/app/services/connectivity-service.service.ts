@@ -3,6 +3,7 @@ import { Network } from '@ionic-native/network';
 import { Platform } from '@ionic/angular';
 
 declare var Connection;
+
 @Injectable({
   providedIn: 'root'
 })

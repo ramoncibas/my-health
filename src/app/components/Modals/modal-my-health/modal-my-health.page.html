@@ -17,9 +17,7 @@
   </div>
 
   <div class="container">
-    <ion-button (click)="cleanHistory(data)" color="danger">
-      Limpar Historico
-    </ion-button>
+    <ion-button (click)="cleanHistory(data)" color="danger">Limpar Historico</ion-button>
 
     <ion-list *ngIf="!data.length" class="ion-no-padding">
       <ion-item *ngFor="let items of [0, 1, 2]" lines="none" style="margin-top: 10px;">  
@@ -47,7 +45,7 @@
         <ion-item lines="none">
           <ion-label>
             <h2>{{ item.about }}</h2>
-            <h4 *ngIf="item.description != ''">{{ item.description}}</h4>
+            <h4 *ngIf="item.description != ''">{{ item.description }}</h4>
             <p *ngIf="item.dayAt != ''">{{ item.dayAt }}</p>
           </ion-label>
         </ion-item>

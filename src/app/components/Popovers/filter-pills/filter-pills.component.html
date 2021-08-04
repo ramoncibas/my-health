@@ -6,13 +6,11 @@
   <ion-item>
     <ion-label>
       <h2>Nome:</h2>
-
       <ion-chip *ngIf="pillName">
         <ion-label>{{ pillName }}</ion-label>
         <ion-icon name="close"></ion-icon>
       </ion-chip>
     </ion-label>
-
     <ion-select ngDefaultControl [(ngModel)]="pillName" (ionChange)="setPillName($event)">
       <ion-select-option *ngFor="let item of data" [value]="item.value">{{ item.name }}</ion-select-option>
     </ion-select>
@@ -21,7 +19,6 @@
   <ion-item>
     <div class="container range">
       <ion-label>Valor:</ion-label>
-
       <ion-range
         min="0"
         max="1000"
@@ -37,7 +34,6 @@
         (ionChange)="setPrice($event)"
       >
       </ion-range>
-
       <ion-chip *ngIf="price">
         <ion-icon name="cash"></ion-icon>
         <ion-label>até R$: {{ price }}</ion-label>
@@ -63,7 +59,6 @@
       (ionChange)="setAmount($event)"
     >
     </ion-range>
-
     <ion-chip *ngIf="amount">
       <ion-label>{{ "Quantidade: " + amount }}</ion-label>
       <ion-icon name="close"></ion-icon>
@@ -72,8 +67,7 @@
   </ion-item>
 
   <ion-buttons class="ion-justify-content-center">
-    <ion-button (click)="closePopover()" color="danger"> Cancelar </ion-button>
-
-    <ion-button (click)="setFilter()" color="success"> Confirmar </ion-button>
+    <ion-button (click)="closePopover()" color="danger">Cancelar</ion-button>
+    <ion-button (click)="setFilter()" color="success">Confirmar</ion-button>
   </ion-buttons>
 </ion-list>
