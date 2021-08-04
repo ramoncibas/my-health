@@ -23,24 +23,9 @@ const routes: Routes = [
     path: 'medical-appointment',
     loadChildren: () => import('./pages/medical-appointment/medical-appointment.module')
       .then((m) => m.MedicalAppointmentPageModule), canActivate: [AuthGuard],
-  },
-  {
-    path: 'make-appointment',
-    loadChildren: () => import('./pages/make-an-appointment/make-an-appointment.module')
-      .then((m) => m.MakeAnAppointmentPageModule), canActivate: [AuthGuard],
-  },
-  {
-    path: 'make-appointment/:id',
-    loadChildren: () => import('./pages/make-an-appointment/make-an-appointment.module')
-      .then((m) => m.MakeAnAppointmentPageModule), canActivate: [AuthGuard],
-  },
+  },  
   {
     path: 'my-appointment',
-    loadChildren: () => import('./pages/my-appointment/my-appointment.module')
-      .then((m) => m.MyAppointmentPageModule), canActivate: [AuthGuard],
-  },
-  {
-    path: 'my-appointment/:id',
     loadChildren: () => import('./pages/my-appointment/my-appointment.module')
       .then((m) => m.MyAppointmentPageModule), canActivate: [AuthGuard],
   },
@@ -63,8 +48,7 @@ const routes: Routes = [
     path: 'health-services',
     loadChildren: () => import('./pages/health-services/health-services.module')
       .then( m => m.HealthServicesPageModule), canActivate: [AuthGuard]
-  },
- 
+  }, 
 ];
 
 @NgModule({

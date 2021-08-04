@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { ConnectivityService } from './services/connectivity-service.service';
+import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,8 @@ import { ConnectivityService } from './services/connectivity-service.service';
     },
     ConnectivityService,
     Keyboard,
-    SplashScreen
+    SplashScreen,
+    SocialSharing
   ],
   bootstrap: [AppComponent],
 })
