@@ -29,10 +29,8 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-/environments
+src/environments
 /resources
-src/environments/environment.ts
 src/assets/img/waves.svg
 /android
 /ios
-/ModeloApp
