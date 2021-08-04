@@ -2,8 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
+
 import { ModalChatPage } from '../../components/Modals/modal-chat/modal-chat.page';
+
 
 @Component({
   selector: 'app-sac',
@@ -21,49 +24,55 @@ import { ModalChatPage } from '../../components/Modals/modal-chat/modal-chat.pag
 export class SacPage implements OnInit {
   constructor(
     private actionSheetController: ActionSheetController,
-    private modalControll: ModalController
+    private modalControll: ModalController,
+    private socialSharing: SocialSharing,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() { }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Compartilhar',
+      header: 'Contatar via:',
       cssClass: 'my-custom-class',
       buttons: [
         {
           text: 'WhatsApp',
           icon: 'logo-whatsapp',
           handler: () => {
-            console.log('WhatsApp clicked');
+            this.socialSharing.shareViaWhatsAppToReceiver("11982275226","Olá! Estou precisando de Ajuda!").then(() => {
+              console.log('WhatsApp clicked');
+            }).catch(console.log)
           },
         },
         {
           text: 'Facebook',
           icon: 'logo-facebook',
           handler: () => {
-            console.log('Facebook clicked');
+            window.location.href = "https://www.facebook.com/"
           },
         },
         {
           text: 'Instagram',
           icon: 'logo-instagram',
           handler: () => {
-            console.log("Instagram clicked");
+            window.location.href = "https://www.instagram.com/"            
           },
         },
         {
           text: 'LinkedIn',
           icon: 'logo-linkedin',
           handler: () => {
-            console.log('Linkedin clicked');
+            window.location.href = "https://www.linkedin.com/"            
           },
         },
         {
           text: 'Email',
           icon: 'mail',
           handler: () => {
-            console.log('Email clicked');
+            this.socialSharing.shareViaEmail("Ola! Estou precisando de Ajuda!", "Help", ["ramon.cibas@hotmail.com"]).then(() => {
+              console.log("Email clicked!");
+            }).catch(console.log);
           },
         },
         {
