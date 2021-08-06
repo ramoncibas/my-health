@@ -64,13 +64,12 @@
       --border-color: rgba(0, 0, 0, 0.125);
       --border-width: 1px;
       --border-style: solid;
-      --border-radius: 10px;
       --padding-top: 5%;
       --padding-bottom: 5%;
       box-shadow: var(--ion-box-shadow);
 
-      &~ion-item {
-        margin-top: 10px;
+      &:first-of-type{
+        border-radius: 10px 10px 0 0;
       }
     }
 
