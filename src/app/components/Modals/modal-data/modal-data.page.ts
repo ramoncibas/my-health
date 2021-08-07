@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+
 import { AppointmentService } from '../../../services/appointment.service';
+import { PillService } from 'src/app/services/pill.service';
+
 @Component({
   selector: 'app-modal-data',
   templateUrl: './modal-data.page.html',
@@ -13,7 +16,8 @@ export class ModalDataPage implements OnInit {
   private price;
   constructor(
     private modalControll: ModalController,
-    private appoitment: AppointmentService
+    private appoitment: AppointmentService,
+    private pills: PillService
   ) { }
 
   ngOnInit() {        
@@ -37,7 +41,11 @@ export class ModalDataPage implements OnInit {
     await this.appoitment.addAppointment(data);
   }
 
-  buyPill(data) {
-    console.log(data)
+  async buyPill(data) {
+    const newObj = {
+      ...data,
+      amount: 777
+    }
+    await this.pills.buyPills(newObj);
   }
 }
