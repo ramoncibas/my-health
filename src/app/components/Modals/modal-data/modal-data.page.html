@@ -49,7 +49,7 @@
         </ion-label>
       </ion-item>
       
-      <ion-button *ngIf="data.type != 'pills'; else buy_pills" (click)="mkAppointment(data)">Agendar</ion-button>
+      <ion-button *ngIf="data.specialty; else buy_pills" (click)="mkAppointment(data)">Agendar</ion-button>
       <ng-template #buy_pills>
         <ion-button (click)="buyPill(data)">Comprar</ion-button>
       </ng-template>

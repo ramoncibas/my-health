@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Chat Box</ion-title>
     <ion-button (click)="closeModal()" fill="clear" slot="start">
-      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      <ion-icon slot="icon-only" name="arrow-back" style="color: #fff;"></ion-icon>
     </ion-button>
   </ion-toolbar>  
 </ion-header>
@@ -26,15 +26,14 @@
       >
         <b>{{ !item.myMsg ? 'Atendente' : 'Eu' }}</b><br>
         <span>{{ item.msg }}</span>
-        <div class="time ion-text-right"><br>{{ item.createdAt?.toDate().toDateString() | date:'short' }}</div>
-        
+        <div class="time ion-text-right"><br>{{ item.createdAt?.toDate().toDateString() | date:'short' }}</div>        
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar color="light">
+    <ion-toolbar>
       <ion-row class="ion-align-items-center">
         <ion-col size="10">
           <ion-textarea
@@ -47,7 +46,7 @@
           ></ion-textarea>
         </ion-col>
         <ion-col size="2">
-          <ion-button class="msg-btn" (click)="sendMessage()" expand="block" fill="clear">
+          <ion-button class="msg-btn" (click)="sendMessage()" expand="block">
             <ion-icon slot="icon-only" name="send"></ion-icon>
           </ion-button>
         </ion-col>
