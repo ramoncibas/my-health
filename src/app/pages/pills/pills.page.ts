@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Pills } from 'src/app/interfaces/pills';
+import { Pill } from 'src/app/interfaces/pills';
 import { PillService } from 'src/app/services/pill.service';
 
 import { PopoverController } from '@ionic/angular';
@@ -25,14 +25,14 @@ import { FilterPillsComponent } from 'src/app/components/Popovers/filter-pills/f
 })
 export class PillsPage implements OnInit {
 
-  private pills = new Array<Pills>();
+  private pills = new Array<Pill>();
   private pillSubscription: Subscription;
 
   constructor(
     public popoverController: PopoverController,
     private pillService: PillService
   ) {
-    this.pillSubscription = this.pillService.getPills().subscribe(data => {
+    this.pillSubscription = this.pillService.getAllPills().subscribe(data => {
       this.pills = data;
     })
   }
