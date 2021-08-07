@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
-import { Appointment } from '../../interfaces/appointment';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import { Appointment } from '../interfaces/appointment';
+import { User } from '../interfaces/user';
 import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {
+  currentUser: User = null;
   private appointementCollection: AngularFirestoreCollection<Appointment>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore
+  ) {
     this.appointementCollection = this.afs.collection<Appointment>('appointment');
+    this.afAuth.onAuthStateChanged(user => {this.currentUser = user});
   }
-
-  getAppointment(id: string) {}
 
   getAppointments() {
     return this.appointementCollection.snapshotChanges().pipe(
@@ -28,7 +34,9 @@ export class AppointmentService {
     );
   }
 
-  addAppointment(appointment) {}
+  getAppointment(id: string) {}
+  
+  addAppointment(appointment: Appointment) {}
 
   updateAppointment(id: string, appointment: Appointment) {}
 
