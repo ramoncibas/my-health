@@ -34,7 +34,6 @@ export class ChatService {
     return this.getUsers().pipe(
       switchMap(res => {
         users = res;
-        console.log('all users: ', users);
         return this.afs.collection('messages', ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),      
       map(messages => {
@@ -43,7 +42,6 @@ export class ChatService {
           m.fromEmail = this.getUserForMsg('email', m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
         }
-        console.log('all messages', messages);
         return messages;
       })
     )
