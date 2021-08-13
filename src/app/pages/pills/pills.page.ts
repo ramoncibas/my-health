@@ -37,7 +37,9 @@ export class PillsPage implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.pills)
+  }
   
   // Destroy listen
   ngOnDestroy() {
