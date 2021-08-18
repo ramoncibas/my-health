@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 
 import { AppointmentService } from '../../../services/appointment.service';
 import { PillService } from 'src/app/services/pill.service';
@@ -14,11 +14,14 @@ export class ModalDataPage implements OnInit {
   @Input() data: any;
 
   private price;
+  private loading: any;
   constructor(
+    private loadingControll: LoadingController,
+    private toastControll : ToastController,
     private modalControll: ModalController,
     private appoitment: AppointmentService,
-    private pills: PillService
-  ) { }
+    private pills: PillService,        
+  ) {}
 
   ngOnInit() {        
      if (this.data.picture == null || this.data.picture == '') {
@@ -37,15 +40,37 @@ export class ModalDataPage implements OnInit {
   }
 
   async mkAppointment(data) {
+    //await this.presentLoading();
     console.log(data)
     await this.appoitment.addAppointment(data);
   }
 
   async buyPill(data) {
-    const newObj = {
+    console.log(data)
+    await this.presentLoading();
+    const newData = {
       ...data,
       amount: 777
     }
-    await this.pills.buyPills(newObj);
+    await this.pills.buyPills(newData);
+    //console.log(dados)
+  }
+
+  // Loading popup
+  async presentLoading() {
+    this.loading = await this.loadingControll.create({
+      cssClass: 'my-custom-class',
+      message: 'Por favor, aguarde...'
+    });
+    return this.loading.present();
+  }
+
+  // Toast message
+  async presentToast(message: string) {
+    const toast = await this.toastControll.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
   }
 }
