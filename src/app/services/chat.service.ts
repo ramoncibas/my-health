@@ -37,7 +37,7 @@ export class ChatService {
         return this.afs.collection('messages', ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),      
       map(messages => {
-        for (let m of messages) {          
+        for (let m of messages) {
           m.fromName = this.getUserForMsg('displayName', m.from, users);
           m.fromEmail = this.getUserForMsg('email', m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
