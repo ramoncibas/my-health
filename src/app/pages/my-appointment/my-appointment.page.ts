@@ -40,23 +40,25 @@ export class MyAppointmentPage implements OnInit {
     if(this.dataSubscription) this.dataSubscription.unsubscribe();
   }
   
-  async showModal(e) {    
+  async showModal(e) {        
+    let message: string;
     switch (e) {
       case 'pills':
-        await this.presentModal(this.data[0].pill,"Meus Medicamentos");
+        message = "Meus Medicamentos";
       break;
       case 'vaccine':
-        await this.presentModal(this.data[0].vaccine,"Minhas Vacinas");
+        message = "Minhas Vacinas";
       break;
       case 'check-up':
-        await this.presentModal(this.data[0].check_up,"Meus Exames");
+        message = "Meus Exames";
       break;
       case 'professionals':
-        await this.presentModal(this.data[0].professionals,"Meus Profissionais");
+        message = "Meus Profissionais";
       break;
       default:
         break;
     }
+    await this.presentModal(this.data[0].pill, message)
   }
 
   async presentModal( data:any, type:string) {
