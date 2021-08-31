@@ -12,7 +12,7 @@
 
   <div class="container">
     <ion-list class="appointments ion-no-padding">
-      <ion-item (click)="showModal('pills')" class="appointment-menu" lines="none">
+      <ion-item (click)="showModal('pills', data.pill)" class="appointment-menu" lines="none">
         <ion-icon slot="start" name="person"></ion-icon>
         <ion-label>
           <h2>Meus Medicamentos</h2>
@@ -20,7 +20,7 @@
         </ion-label>
       </ion-item>
 
-      <ion-item (click)="showModal('vaccine')" class="appointment-menu" lines="none">
+      <ion-item (click)="showModal('vaccine', data.vaccine)" class="appointment-menu" lines="none">
         <ion-icon slot="start" name="eyedrop"></ion-icon>
         <ion-label>
           <h2>Minhas Vacinas</h2>
@@ -28,7 +28,7 @@
         </ion-label>
       </ion-item>
 
-      <ion-item (click)="showModal('check-up')" class="appointment-menu" lines="none">
+      <ion-item (click)="showModal('check_up', data.check_up)" class="appointment-menu" lines="none">
         <ion-icon slot="start" name="id-card"></ion-icon>
         <ion-label>
           <h2>Meus Exames</h2>
@@ -36,7 +36,7 @@
         </ion-label>
       </ion-item>
 
-      <ion-item (click)="showModal('professionals')" class="appointment-menu" lines="none">
+      <ion-item (click)="showModal('professionals', data.professionals)" class="appointment-menu" lines="none">
         <ion-icon slot="start" name="person-circle"></ion-icon>
         <ion-label>
           <h2>Meus Profissionais</h2>
