@@ -1,8 +1,8 @@
 {
-  "name": "agendamentoApp",
+  "name": "myhealth",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Ramon Cibas",
+  "homepage": "https://www.github.com/ramoncibas",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -74,10 +74,9 @@
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
   },
-  "description": "An Ionic project",
+  "description": "Aplicação para facilitar o agendamento de consultas medicas!",
   "cordova": {
     "plugins": {
-      "cordova-plugin-googlemaps": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-whitelist": {},
