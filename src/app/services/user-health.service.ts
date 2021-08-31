@@ -1,9 +1,8 @@
-import { Injectable, Input, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Pill, UserPills } from '../interfaces/pills';
+import { map, switchMap } from 'rxjs/operators';
+import { UserHealth } from '../interfaces/user-health';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -18,23 +17,23 @@ export class UserHealthService {
   ) {
     this.dataCollection = this.afs.collection('user_health');
   }
-
-  /**
-   * @return return my pills
-   */
-   getMyPills() {
-    const userUid = this.authService.currentUser.uid;
-    //return this.dataCollection.doc().valueChanges();
-    return this.dataCollection.snapshotChanges().pipe(
-      map(action => {
-        return action.map(item => {
-          const data = item.payload.doc.data();
-          const id = item.payload.doc.id;
-
-          return { id, ...data }
-        })
+  
+  getUserData() {
+    let uid = this.authService.currentUser.uid;
+    
+    return this.getAllData().pipe(
+      switchMap(() => {
+        return this.afs.collection('user_health',  ref => ref.where("userUid", "==", uid)).valueChanges({ idField: 'id' }) as Observable<any[]>;
+      }),
+      map(item => {
+        console.log(item)
+        return item[0];
       })
     )
   }
+
+  getAllData() {
+    return this.dataCollection.valueChanges({ idFliend: "uid"}) as Observable<any[]>;
+  };
 }
 
