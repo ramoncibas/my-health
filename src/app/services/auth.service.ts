@@ -11,9 +11,7 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth,private afs: AngularFirestore) {
     this.afAuth.onAuthStateChanged(async (user) => {
-      if(user !== null) {
-        return this.currentUser = user;        
-      }
+      if(user !== null) return this.currentUser = user;      
       console.log('changed', user);
     });
   }
@@ -25,22 +23,24 @@ export class AuthService {
   async signUp(user: User) {
     const credentials = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
     
+    // Updated display name from user.
     this.afAuth.onAuthStateChanged(async (newUserUpdated) => {
       await newUserUpdated.updateProfile({
-        displayName: user.displayName,
+        displayName: user.displayName,        
       }).then(() => {
         this.currentUser = newUserUpdated;
       })
       console.log("Changed", newUserUpdated);
     });
 
-    const uid = credentials.user.uid;    
-    return this.afs.doc(
-      `users/${uid}`
-    ).set({
+    // Adicionando dados no CloudFirestore
+    const uid = credentials.user.uid;
+    return this.afs.doc(`users/${uid}`).set({
       uid,
       email: credentials.user.email,
-      displayName: user.displayName
+      displayName: user.displayName,
+    }), this.afs.collection('user_health').add({
+      userUid: uid,
     });
   }
 
@@ -51,4 +51,5 @@ export class AuthService {
   getAuth() {
     return this.afAuth;
   }
+  
 }
