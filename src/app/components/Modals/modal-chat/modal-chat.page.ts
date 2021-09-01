@@ -11,7 +11,7 @@ import { Message } from '../../../interfaces/chat';
 })
 
 export class ModalChatPage implements OnInit {
-  // @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent) content: IonContent;
 
   messages: Observable<Message[]>;
   newMsg = '';

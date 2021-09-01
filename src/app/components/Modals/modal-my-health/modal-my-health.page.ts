@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
-import { UserHealthService } from 'src/app/services/user-health.service';
 @Component({
   selector: 'app-modal-my-health',
   templateUrl: './modal-my-health.page.html',
@@ -16,7 +14,7 @@ export class ModalMyHealthPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.table(this.data)
+    console.log(this.data)
   }
   
   async closeModal() {

@@ -28,7 +28,7 @@ export class MyAppointmentPage implements OnInit {
     private modalControll: ModalController,
     private userService: UserHealthService
   ) {
-    this.dataSubscription = this.userService.getUserData().subscribe(data => {
+    this.dataSubscription = this.userService.getCurrentUserDocument().subscribe(data => {
       this.data = data;
     })
   }
