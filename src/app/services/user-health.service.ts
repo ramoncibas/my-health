@@ -1,39 +1,55 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { UserHealth } from '../interfaces/user-health';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserHealthService {
-  private dataCollection: AngularFirestoreCollection<any>;
-
   constructor(
     private afs: AngularFirestore,
     private authService: AuthService
-  ) {
-    this.dataCollection = this.afs.collection('user_health');
-  }
-  
-  getUserData() {
+  ) {}
+
+  /**
+   *
+   * @returns all documents from the "user_health" collection
+   */
+  getCurrentUserDocument() {
     let uid = this.authService.currentUser.uid;
-    
-    return this.getAllData().pipe(
+
+    return this.getAllDoc().pipe(
       switchMap(() => {
-        return this.afs.collection('user_health',  ref => ref.where("userUid", "==", uid)).valueChanges({ idField: 'id' }) as Observable<any[]>;
+        return this.afs
+          .collection('user_health', (ref) => ref.where('userUid', '==', uid))
+          .valueChanges({ idField: 'id' }) as Observable<any[]>;
       }),
-      map(item => {
-        console.log(item)
+      map((item) => {
         return item[0];
       })
-    )
+    );
   }
 
-  getAllData() {
-    return this.dataCollection.valueChanges({ idFliend: "uid"}) as Observable<any[]>;
-  };
-}
+  /**
+   *
+   * @returns the entire collection
+   */
+  getAllDoc() {
+    return this.afs
+      .collection('user_health')
+      .valueChanges({ idFliend: 'uid' }) as Observable<any[]>;
+  }
 
+  /**
+   * @returns the document "id"
+   */
+  getDocId() {
+    return this.getCurrentUserDocument().subscribe((data) => {
+      console.log(data.id)
+      return data.id;
+    });
+  }
+}
