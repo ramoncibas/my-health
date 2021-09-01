@@ -19,8 +19,8 @@
   <div class="container">
     <ion-button (click)="cleanHistory(data)" color="danger">Limpar Historico</ion-button>
 
-    <ion-list *ngIf="!data.length" class="ion-no-padding">
-      <ion-item *ngFor="let items of [0, 1, 2]" lines="none" style="margin-top: 10px;">  
+    <ion-list *ngIf="data == []" class="ion-no-padding">
+      <ion-item *ngFor="let items of [0, 1, 2]" lines="none" style="margin-top: 10px;">
         <ion-label>
           <h3>
             <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
@@ -31,12 +31,17 @@
           <p>
             <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
           </p>
-        </ion-label>
-  
+        </ion-label>  
       </ion-item>
     </ion-list>
 
-    <ion-list class="ion-no-padding">      
+    <ion-list *ngIf="data == undefined">
+      <ion-item lines="none">
+        <ion-label>Sem Historico disponivel</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="ion-no-padding">
       <ion-item-sliding *ngFor="let item of data">
         <ion-item-options side="start">
           <ion-item-option 
