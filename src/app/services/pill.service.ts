@@ -1,64 +1,65 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
-import { Pill, UserPills } from '../interfaces/pills';
-import { Observable } from 'rxjs';
+import { Pill } from '../interfaces/pills';
+import { UserHealthService } from './user-health.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PillService {
-  private pillCollection: AngularFirestoreCollection<Pill>;
+export class PillService {  
+  collectionId = null;
 
-  constructor(private afs: AngularFirestore, private authService: AuthService) {
-    this.pillCollection = this.afs.collection<Pill>('pills');
+  constructor(
+    private afs: AngularFirestore,
+    private userHealthService: UserHealthService
+  ) {
+    this.collectionId = this.userHealthService.getDocId();
+    console.log(this.collectionId)
   }
 
   /**
    * @return all pills from the database
    */
   getAllPills() {
-    return this.pillCollection.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((item) => {
-          const data = item.payload.doc.data();
-          const id = item.payload.doc.id;
-
-          return { id, ...data };
-        });
-      })
-    );
+    return this.afs
+      .collection<Pill>('pills')
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((item) => {
+            const data = item.payload.doc.data();
+            const id = item.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
   }
 
   /**
    * Function that stores user purchase data
-   * @param data pills data
-   *
+   * @param pill pills data   
    */
-  buyPills(data: any) {
-    const dataCollection = this.afs.collection('user_health');
-    const userUid = this.authService.currentUser.uid;
-
-    return dataCollection.doc('gbnIJM32jFouEYsVTf8x').update({
-      pill: firebase.default.firestore.FieldValue.arrayUnion({
-        id: data.id,
-        name: data.name,
-        brand: data.brande,
-        description: data.description,
-        picture: data.picture,
-        amount: data.amount,
-        price: data.price,
-        promotion: data.promotion,
-        boughtBy: userUid,
-        createdAt: firebase.default.firestore.Timestamp.now(),
-      }),
-    });
+  buyPills(data: Pill) {
+    console.log(data)
+    console.log(this.collectionId)
+    return this.afs
+      .collection('user_health')
+      .doc(this.collectionId)
+      .update({
+        pill: firebase.default.firestore.FieldValue.arrayUnion({          
+          name: data.name,          
+          description: data.description,
+          picture: data.picture,
+          amount: data.amount,
+          price: data.price,
+          promotion: data.promotion,
+          createdAt: firebase.default.firestore.Timestamp.now(),
+        }),
+      });
   }
 
   /**
@@ -66,7 +67,7 @@ export class PillService {
    * @param {Pill} pill drug information
    */
   pillsInsert(pill: Pill) {
-    return this.pillCollection.add({
+    return this.afs.collection<Pill>('pills').add({
       name: pill.name,
       description: pill.description,
       price: pill.price,
