@@ -20,10 +20,10 @@ export class ModalDataPage implements OnInit {
     private toastControll : ToastController,
     private modalControll: ModalController,
     private appoitment: AppointmentService,
-    private pills: PillService,        
+    private pills: PillService,
   ) {}
 
-  ngOnInit() {        
+  ngOnInit() {    
      if (this.data.picture == null || this.data.picture == '') {
       this.data.picture = "/assets/img/doctor-avatar.png";
     }
@@ -40,8 +40,8 @@ export class ModalDataPage implements OnInit {
   }
 
   async mkAppointment(data) {
-    //await this.presentLoading();
     console.log(data)
+    await this.presentLoading();
     await this.appoitment.addAppointment(data);
   }
 
