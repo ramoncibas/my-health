@@ -1,44 +1,61 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { AuthService } from './auth.service';
+import { UserHealthService } from './user-health.service';
 import { Appointment } from '../interfaces/appointment';
 import { User } from '../interfaces/user';
-import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppointmentService {
-  currentUser: User = null;
-  private appointementCollection: AngularFirestoreCollection<Appointment>;
+export class AppointmentService {  
+  private collectionId;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
-  ) {
-    this.appointementCollection = this.afs.collection<Appointment>('appointment');
-    this.afAuth.onAuthStateChanged(user => {this.currentUser = user});
+    private afh: AuthService,
+    private afs: AngularFirestore,
+    private userHealthService: UserHealthService,    
+  ) {    
+    this.collectionId = this.userHealthService.getCurrentUserDocument().subscribe((data) => {
+      this.collectionId = data.id;
+    });
   }
-
-  getAppointments() {
-    return this.appointementCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(item => {
-          const data = item.payload.doc.data();
-          const id = item.payload.doc.id;
-
-          return { id, ...data };
-        })
-      })
-    );
-  }
-
-  getAppointment(id: string) {}
   
-  addAppointment(appointment: Appointment) {}
+  /**   
+   * @param appointment data from the user's medical appointment
+   * @returns
+   */
+  addAppointment(appointment: Appointment) {
+    const currentUser = this.afh.currentUser.uid;
+    return this.afs.collection('user_health').doc(this.collectionId).update({
+      check_up: firebase.default.firestore.FieldValue.arrayUnion({
+        userUid: currentUser,
+        doctorUid: appointment.uid,
+        specialty: appointment.specialty,
+        //price: appointment.price,
+        //dayAt: appointment.dayAt,
+        createdAt: firebase.default.firestore.Timestamp.now(),
+      }),
+    })
+  }
 
-  updateAppointment(id: string, appointment: Appointment) {}
+  /**
+   * @param data data from the update of the user's medical appointment
+   */
+  updateAppointment(data: Appointment) {
+    return this.afs.collection('user_health').doc(this.collectionId).update({
+      check_up: firebase.default.firestore.FieldValue.arrayUnion({
+        name: "Consulta de Rotina",
+        dayAt: data.dayAt,
+        appointmentUpdated: firebase.default.firestore.Timestamp.now(),
+      }),      
+    })
+  }
 
-  deleteAppointment(id: string) {}
+  deleteAllOfCollection() {
+    return this.afs.collection('user_health').doc(this.collectionId).update({
+      check_up: firebase.default.firestore.FieldValue.delete()
+    })
+  }
 }
