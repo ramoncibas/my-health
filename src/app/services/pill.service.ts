@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Pill } from '../interfaces/pills';
 import { UserHealthService } from './user-health.service';
+import { UserHealth } from '../interfaces/user-health';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,9 @@ export class PillService {
     private afs: AngularFirestore,
     private userHealthService: UserHealthService
   ) {
-    this.collectionId = this.userHealthService.getDocId();
-    console.log(this.collectionId)
+    this.collectionId = this.userHealthService.getCurrentUserDocument().subscribe((data) => {
+      this.collectionId = data.id;
+    });
   }
 
   /**
@@ -41,7 +43,7 @@ export class PillService {
 
   /**
    * Function that stores user purchase data
-   * @param pill pills data   
+   * @param pill pills data
    */
   buyPills(data: Pill) {
     console.log(data)
@@ -50,7 +52,7 @@ export class PillService {
       .collection('user_health')
       .doc(this.collectionId)
       .update({
-        pill: firebase.default.firestore.FieldValue.arrayUnion({          
+        pill: firebase.default.firestore.FieldValue.arrayUnion({
           name: data.name,          
           description: data.description,
           picture: data.picture,
@@ -59,7 +61,7 @@ export class PillService {
           promotion: data.promotion,
           createdAt: firebase.default.firestore.Timestamp.now(),
         }),
-      });
+      });    
   }
 
   /**
