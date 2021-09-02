@@ -42,32 +42,32 @@ export class MyAppointmentPage implements OnInit {
   }
   
   async showModal(type, data) {
-    let message: string;
+    let title: string;
     switch (type) {
       case 'pills':
-        message = "Meus Medicamentos";        
+        title = "Meus Medicamentos";        
       break;
       case 'vaccine':
-        message = "Minhas Vacinas";        
+        title = "Minhas Vacinas";        
       break;
       case 'check_up':
-        message = "Meus Exames";
+        title = "Meus Exames";
       break;
       case 'professionals':
-        message = "Meus Profissionais";        
+        title = "Meus Profissionais";        
       break;
       default:
         break;
     }
-    this.presentModal(data, type);
+    await this.presentModal(data, title);
   }
 
-  async presentModal( data:any, type:string) {
+  async presentModal( data:any, title:string) {
     const modal = await this.modalControll.create({
       component: ModalMyHealthPage,
       cssClass: 'my-custom-class',
       swipeToClose: true,
-      componentProps: { data, type },
+      componentProps: { data, title },
     });
     return await modal.present();
   }

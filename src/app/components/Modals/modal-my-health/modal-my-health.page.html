@@ -12,12 +12,16 @@
 
     <div class="myappointment">
       <img src="/assets/img/doctor-avatar.png">
-      <h4>{{ type }}</h4>
+      <h4>{{ title }}</h4>
     </div>
   </div>
 
   <div class="container">
-    <ion-button (click)="cleanHistory(data)" color="danger">Limpar Historico</ion-button>
+    <ion-button 
+      [disabled]="data == undefined && true"
+      (click)="cleanHistory(data)"
+      color="danger"
+    >Limpar Historico</ion-button>
 
     <ion-list *ngIf="data == []" class="ion-no-padding">
       <ion-item *ngFor="let items of [0, 1, 2]" lines="none" style="margin-top: 10px;">

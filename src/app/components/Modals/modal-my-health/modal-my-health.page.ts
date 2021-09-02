@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalMyHealthPage implements OnInit {  
   @Input() data: any;
-  @Input() type: any;
+  @Input() title: any;
 
   constructor(
     private modalControll: ModalController,
@@ -15,6 +15,7 @@ export class ModalMyHealthPage implements OnInit {
 
   ngOnInit() {
     console.log(this.data)
+    console.log(this.title)
   }
   
   async closeModal() {
