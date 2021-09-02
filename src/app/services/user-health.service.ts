@@ -42,14 +42,4 @@ export class UserHealthService {
       .collection('user_health')
       .valueChanges({ idFliend: 'uid' }) as Observable<any[]>;
   }
-
-  /**
-   * @returns the document "id"
-   */
-  getDocId() {
-    return this.getCurrentUserDocument().subscribe((data) => {
-      console.log(data.id)
-      return data.id;
-    });
-  }
 }
