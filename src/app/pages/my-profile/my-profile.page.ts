@@ -11,7 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MyProfilePage implements OnInit {
   user: User = null;
   
-  constructor(private authServices: AuthService, private navgation: NavController) {
+  constructor(
+    private authServices: AuthService, 
+    private navgation: NavController,
+  ) {
     this.user = this.authServices.currentUser;
   }
 
