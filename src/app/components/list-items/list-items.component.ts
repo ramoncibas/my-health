@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { ModalController, PopoverController, IonInfiniteScroll } from '@ionic/angular';
+import { ModalController, IonInfiniteScroll } from '@ionic/angular';
 
 import { ModalDataPage } from '../Modals/modal-data/modal-data.page';
 import { FilterDoctorsComponent } from '../Popovers/filter-doctors/filter-doctors.component';
@@ -25,21 +25,17 @@ export class ListItemsComponent implements OnInit {
   private discountPrice;
   constructor(
     private modalControll: ModalController,
-    private popoverController: PopoverController
-  ) { }
+  ) {}
 
   ngOnInit() {}
 
   // Show Modal with options (make-appointment and show time of doctor)
   async presentModal(data) {
-    console.log(this.data) 
     const modal = await this.modalControll.create({
       component: ModalDataPage,
       cssClass: 'my-custom-class',
       swipeToClose: true,
-      componentProps: {
-        data
-      }
+      componentProps: { data }
     });
     return await modal.present();
   }
