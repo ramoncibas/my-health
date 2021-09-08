@@ -2,49 +2,46 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AuthService } from './auth.service';
-import { UserHealthService } from './user-health.service';
 import { Appointment } from '../interfaces/appointment';
-import { User } from '../interfaces/user';
+import { Doctor } from '../interfaces/doctor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {  
-  private collectionId;
-
   constructor(
     private afh: AuthService,
     private afs: AngularFirestore,
-    private userHealthService: UserHealthService,    
-  ) {    
-    this.collectionId = this.userHealthService.getCurrentUserDocument().subscribe((data) => {
-      this.collectionId = data.id;
-    });
-  }
+  ) {}
   
   /**   
+   * Add Appointment to database
    * @param appointment data from the user's medical appointment
-   * @returns
+   * @returns return new appointment
    */
-  addAppointment(appointment: Appointment) {
+  addAppointment(collectionId: string, appointment: Appointment) {
     const currentUser = this.afh.currentUser.uid;
-    return this.afs.collection('user_health').doc(this.collectionId).update({
+    return this.afs.collection('user_health').doc(collectionId).update({
       check_up: firebase.default.firestore.FieldValue.arrayUnion({
         userUid: currentUser,
-        doctorUid: appointment.uid,
-        specialty: appointment.specialty,
+        doctorUid: appointment.id,
         //price: appointment.price,
         //dayAt: appointment.dayAt,
+        name: appointment.name,
+        description: appointment.description,
+        picture: appointment.picture,
+        specialty: appointment.specialty,
         createdAt: firebase.default.firestore.Timestamp.now(),
       }),
     })
   }
 
   /**
+   * Update Appointment Information
    * @param data data from the update of the user's medical appointment
    */
-  updateAppointment(data: Appointment) {
-    return this.afs.collection('user_health').doc(this.collectionId).update({
+  updateAppointment(collectionId: string, data: Appointment) {
+    return this.afs.collection('user_health').doc(collectionId).update({
       check_up: firebase.default.firestore.FieldValue.arrayUnion({
         name: "Consulta de Rotina",
         dayAt: data.dayAt,
@@ -53,8 +50,12 @@ export class AppointmentService {
     })
   }
 
-  deleteAllOfCollection() {
-    return this.afs.collection('user_health').doc(this.collectionId).update({
+  /**
+   * Clear Appointmet History
+   * @param collectionId this parameter has the id of the collection to be deleted
+   */
+  deleteAppointmentHistory(collectionId: string) {
+    return this.afs.collection('user_health').doc(collectionId).update({
       check_up: firebase.default.firestore.FieldValue.delete()
     })
   }

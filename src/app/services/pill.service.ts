@@ -11,16 +11,12 @@ import { UserHealth } from '../interfaces/user-health';
 @Injectable({
   providedIn: 'root',
 })
-export class PillService {  
-  collectionId = null;
-
+export class PillService {
   constructor(
     private afs: AngularFirestore,
     private userHealthService: UserHealthService
   ) {
-    this.collectionId = this.userHealthService.getCurrentUserDocument().subscribe((data) => {
-      this.collectionId = data.id;
-    });
+    
   }
 
   /**
@@ -45,12 +41,10 @@ export class PillService {
    * Function that stores user purchase data
    * @param pill pills data
    */
-  buyPills(data: Pill) {
-    console.log(data)
-    console.log(this.collectionId)
+  buyPills(collectionId: string, data: Pill) {
     return this.afs
       .collection('user_health')
-      .doc(this.collectionId)
+      .doc(collectionId)
       .update({
         pill: firebase.default.firestore.FieldValue.arrayUnion({
           name: data.name,          
@@ -61,7 +55,13 @@ export class PillService {
           promotion: data.promotion,
           createdAt: firebase.default.firestore.Timestamp.now(),
         }),
-      });    
+      });
+  }
+
+  deletePillHistory(collectionId: string) {
+    return this.afs.collection("user_health").doc(collectionId).update({
+      pill: firebase.default.firestore.FieldValue.delete()
+    });
   }
 
   /**
