@@ -11,14 +11,14 @@ import { Message } from '../../../interfaces/chat';
 })
 
 export class ModalChatPage implements OnInit {
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, {static: true}) content: IonContent;  
 
   messages: Observable<Message[]>;
   newMsg = '';
   constructor(
     private chatService: ChatService, 
     private modalController: ModalController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.messages = this.chatService.getChatMessage();
@@ -27,8 +27,8 @@ export class ModalChatPage implements OnInit {
   sendMessage() {
     this.chatService.addChatMessage(this.newMsg).then(() => {
       this.newMsg = '';
-      // this.content.scrollToBottom(500);
-    })
+      this.content.scrollToBottom(500);
+    });
   }
 
   async closeModal() {

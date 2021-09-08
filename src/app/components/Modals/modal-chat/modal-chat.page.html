@@ -25,7 +25,7 @@
         [ngClass]="{ 'my-message': item.myMsg, 'other-message': !item.myMsg }"
       >
         <b>{{ !item.myMsg ? 'Atendente' : 'Eu' }}</b><br>
-        <span>{{ item.msg }}</span>
+        <span>{{ item.message }}</span>
         <div class="time ion-text-right"><br>{{ item.createdAt?.toDate().toDateString() | date:'short' }}</div>        
       </ion-col>
     </ion-row>
