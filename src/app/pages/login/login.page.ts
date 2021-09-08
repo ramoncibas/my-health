@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
+  // Moving the background according to the "login" and "register" button
   segmentChanged(event: any) {
     if (event.detail.value === "login") {
       this.slides.slidePrev();
@@ -38,7 +39,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  // Logando usuario
+  // Logging in user
   async signIn() {
     await this.presentLoading();
 
@@ -46,7 +47,7 @@ export class LoginPage implements OnInit {
       this.authServices.currentUser = null;
       await this.authServices.signIn(this.userLogin);
     } catch (error) {
-      // Pegando erro
+      // Catching errors
       let message: string;
       switch (error.code) {
         case 'auth/invalid-email':
@@ -67,20 +68,20 @@ export class LoginPage implements OnInit {
       console.log(error);
       this.presentToast(message);
     } finally {
-      // Esconder o loading
+      // Hiding the loading
       this.loading.dismiss();
     }
   }
 
-  // Registrando um usuario
+  // Registering a user
   async signUp() {
     await this.presentLoading();
 
     try {
-      // Ele retorna o usuario autenticado
+      // It returns the authenticated user
       await this.authServices.signUp(this.userRegister);
     } catch (error) {
-      // Tratando erros
+      // Catching errors
       let message: string;
       switch (error.code) {
         case 'auth/invalid-email':
@@ -105,7 +106,7 @@ export class LoginPage implements OnInit {
       console.log(error);
       this.presentToast(message);
     } finally {
-      // Esconder o loading
+      // Hiding the loading
       this.loading.dismiss();
     }
   }

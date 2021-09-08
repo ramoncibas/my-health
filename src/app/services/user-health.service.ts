@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { UserHealth } from '../interfaces/user-health';
@@ -9,13 +9,17 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserHealthService {
+  private userhealthCollection: AngularFirestoreCollection<UserHealth>;
+
   constructor(
     private afs: AngularFirestore,
     private authService: AuthService
-  ) {}
+  ) {
+    this.userhealthCollection = this.afs.collection<UserHealth>('user_health');
+  }
 
   /**
-   *
+   * Getting the current document from the logged in user
    * @returns all documents from the "user_health" collection
    */
   getCurrentUserDocument() {
@@ -25,7 +29,7 @@ export class UserHealthService {
       switchMap(() => {
         return this.afs
           .collection('user_health', (ref) => ref.where('userUid', '==', uid))
-          .valueChanges({ idField: 'id' }) as Observable<any[]>;
+          .valueChanges({ idField: 'id' }) as Observable<UserHealth[]>;
       }),
       map((item) => {
         return item[0];
@@ -34,12 +38,11 @@ export class UserHealthService {
   }
 
   /**
-   *
+   * Taking the documents from the collection "user_health"
    * @returns the entire collection
    */
   getAllDoc() {
-    return this.afs
-      .collection('user_health')
-      .valueChanges({ idFliend: 'uid' }) as Observable<any[]>;
+    return this.userhealthCollection
+      .valueChanges({ idFliend: 'uid' }) as Observable<UserHealth[]>;
   }
 }

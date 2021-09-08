@@ -114,5 +114,5 @@ export class HealthServicesPage implements OnInit {
     document.addEventListener("offline", onOffline, false);
   }
 
-  //// map - https://talkjs.com/build/ionic-chat/?utm_source=google&utm_medium=ppc&utm_campaign=frameworks&utm_term=ionic&gclid=EAIaIQobChMI4Jqw7sve8QIVVgWRCh022gFxEAAYASAAEgJ34PD_BwE
+  // map - https://talkjs.com/build/ionic-chat/?utm_source=google&utm_medium=ppc&utm_campaign=frameworks&utm_term=ionic&gclid=EAIaIQobChMI4Jqw7sve8QIVVgWRCh022gFxEAAYASAAEgJ34PD_BwE
 }

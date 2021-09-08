@@ -11,10 +11,14 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
 
+  /**
+   * Checking if you are logged in or not, if you are not, go back to the login screen
+   * @returns boolean
+   */
   canActivate(): Promise<boolean> {
     return new Promise(resolve => {
       this.authService.getAuth().onAuthStateChanged(user => {
-        // Verificando se esta logado ou não
+        // 
         if(!user) this.router.navigate(['login']);
 
         resolve(user ? true : false);

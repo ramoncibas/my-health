@@ -15,30 +15,38 @@ export class ChatService {
 
   constructor(
     private afAuth: AngularFireAuth, 
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) {
     this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
     });
   }
 
-  addChatMessage(msg) {
+  /**
+   * Adding message to collection
+   * @param message message sent by the user
+   */
+  addChatMessage(message) {
     return this.afs.collection('messages').add({
-      msg,
+      message,
       from: this.currentUser.uid,
       createdAt: firebase.default.firestore.FieldValue.serverTimestamp(),
       displayName: this.currentUser.displayName,
     });
   }
 
-  getChatMessage() {
+  /**
+   * Taking the sent messages and adding to the chat
+   * @returns a collection of messages
+   */
+  getChatMessage(): Observable<Message[]> {
     let users = [];
 
     return this.getUsers().pipe(
       switchMap((res) => {
         users = res;
         return this.afs
-          .collection('messages', (ref) => ref.orderBy('createdAt'))
+          .collection<Message>('messages', (ref) => ref.orderBy('createdAt'))
           .valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),
       map((messages) => {
@@ -52,12 +60,23 @@ export class ChatService {
     );
   }
 
-  getUsers() {
+  /**
+   * Getting all users
+   * @returns all users
+   */
+  getUsers(): Observable<User[]> {
     return this.afs
       .collection('users')
       .valueChanges({ idField: 'uid' }) as Observable<User[]>;
   }
 
+  /**
+   * Getting the user according to the sent message
+   * @param type of user identifier, "id" or "email"
+   * @param msgFromId id of the user who sent the message
+   * @param users collection of users
+   * @returns the user's name or email
+   */
   getUserForMsg(type, msgFromId, users: User[]): string {
     for (let user of users) {
       if (user.uid == msgFromId) {

@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
-
 import { Doctor } from '../interfaces/doctor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  //currentUser: User = null;
   private doctorCollection: AngularFirestoreCollection<Doctor>;
   
-  constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+  constructor(    
+    private afs: AngularFirestore,
   ) {
     this.doctorCollection = this.afs.collection<Doctor>('doctors');
-    //this.afAuth.onAuthStateChanged(user => {this.currentUser = user});
   }
 
-  getDoctors() {
+  /**
+   * Getting data from doctors for consultation
+   * @returns returning all doctor collection data
+   */
+  getDoctors(): Observable<Doctor[]> {
     return this.doctorCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(item => {
@@ -33,11 +33,13 @@ export class DoctorService {
     );
   }
 
-  // Registro do doutor, sera as informaçoes dele
-  // O usuario podera ver as informaçoes do doutor, e assim optar por fazer uma consulta
+  /**
+   * Inserting a doctor in firestore
+   * @param data doctor's information
+   * @returns a new doctor in firestore
+   */
   doctorAppointment(data: Doctor) {
-    return this.afs.collection('doctors').add({
-      uid: data.uid,
+    return this.doctorCollection.add({
       name: data.name,
       description: data.description,
       picture: data.picture,

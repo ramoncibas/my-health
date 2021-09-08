@@ -9,31 +9,43 @@ import { User } from '../interfaces/user';
 export class AuthService {
   currentUser: User = null;
 
-  constructor(private afAuth: AngularFireAuth,private afs: AngularFirestore) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+  ) {
     this.afAuth.onAuthStateChanged(async (user) => {
-      if(user !== null) return this.currentUser = user;      
-      console.log('changed', user);
+      if(user !== null) return this.currentUser = user;
     });
   }
 
-  signIn(user: User) {    
+  /**
+   * Logging in user with email and password
+   * @param {User} user user data
+   * @returns logged in user
+   */
+  signIn(user: User) {
     return this.afAuth.signInWithEmailAndPassword(user.email, user.password);
   }
 
+  /**
+   * Registering user in both authentication and firestore
+   * @param {User} user user data
+   * @returns 
+   */
   async signUp(user: User) {
     const credentials = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
     
     // Updated display name from user.
     this.afAuth.onAuthStateChanged(async (newUserUpdated) => {
       await newUserUpdated.updateProfile({
-        displayName: user.displayName,        
+        displayName: user.displayName,
       }).then(() => {
         this.currentUser = newUserUpdated;
       })
       console.log("Changed", newUserUpdated);
     });
 
-    // Adicionando dados no CloudFirestore
+    // Adding User Data to CloudFirestore
     const uid = credentials.user.uid;
     return this.afs.doc(`users/${uid}`).set({
       uid,
@@ -44,10 +56,18 @@ export class AuthService {
     });
   }
 
+  /**
+   * Method log out user   
+   * @returns logged out user
+   */
   singOut() {
-    return this.afAuth.signOut();    
+    return this.afAuth.signOut();
   }
 
+  /**
+   * Getting user authentication data
+   * @returns user authentication data
+   */
   getAuth() {
     return this.afAuth;
   }

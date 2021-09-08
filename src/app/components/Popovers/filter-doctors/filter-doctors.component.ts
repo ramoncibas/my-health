@@ -46,11 +46,13 @@ export class FilterDoctorsComponent implements OnInit {
     }
   }
 
+  // Select the date of appointment
   setDate(event){
     let data = event.target.value;
     this.date = data;
   }
 
+  // Closing the filter and passing the data
   setFilter() {
     const data = {
       specialty: this.specialty != undefined && this.specialty,      

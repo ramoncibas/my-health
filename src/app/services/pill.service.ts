@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AuthService } from './auth.service';
 import { Pill } from '../interfaces/pills';
-import { UserHealthService } from './user-health.service';
 import { UserHealth } from '../interfaces/user-health';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PillService {
+  private pillCollection: AngularFirestoreCollection<Pill>;
+  private userHealthCollection: AngularFirestoreCollection<UserHealth>;
+
   constructor(
     private afs: AngularFirestore,
-    private userHealthService: UserHealthService
   ) {
-    
+    this.pillCollection = this.afs.collection<Pill>('pills');
+    this.userHealthCollection = this.afs.collection<UserHealth>('user_health');
   }
 
   /**
-   * @return all pills from the database
+   * Getting all the pills in the database
+   * @returns all pills from the database
    */
-  getAllPills() {
-    return this.afs
-      .collection<Pill>('pills')
+  getAllPills(): Observable<Pill[]> {
+    return this.pillCollection
       .snapshotChanges()
       .pipe(
         map((actions) => {
@@ -39,15 +41,16 @@ export class PillService {
 
   /**
    * Function that stores user purchase data
-   * @param pill pills data
+   * @param collectionId id of the collection to added pill
+   * @param {Pill} data pills data
    */
   buyPills(collectionId: string, data: Pill) {
-    return this.afs
-      .collection('user_health')
+    return this.userHealthCollection
       .doc(collectionId)
+      .ref
       .update({
         pill: firebase.default.firestore.FieldValue.arrayUnion({
-          name: data.name,          
+          name: data.name,
           description: data.description,
           picture: data.picture,
           amount: data.amount,
@@ -58,10 +61,18 @@ export class PillService {
       });
   }
 
+  /**
+   * Clear Appointmet History
+   * @param collectionId id of the collection to be deleted
+   * @returns empty collection
+   */
   deletePillHistory(collectionId: string) {
-    return this.afs.collection("user_health").doc(collectionId).update({
-      pill: firebase.default.firestore.FieldValue.delete()
-    });
+    return this.userHealthCollection
+      .doc(collectionId)
+      .ref
+      .update({
+        pill: firebase.default.firestore.FieldValue.delete()
+      });
   }
 
   /**
@@ -69,7 +80,7 @@ export class PillService {
    * @param {Pill} pill drug information
    */
   pillsInsert(pill: Pill) {
-    return this.afs.collection<Pill>('pills').add({
+    return this.pillCollection.add({
       name: pill.name,
       description: pill.description,
       price: pill.price,

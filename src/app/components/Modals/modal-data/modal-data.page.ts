@@ -32,11 +32,11 @@ export class ModalDataPage implements OnInit {
   }
 
   ngOnInit() {
-    // Tratando se o medico tem foto.
+    // Checking if the doctor has a photo
     if (this.data.picture == null || this.data.picture == '')
       this.data.picture = "/assets/img/doctor-avatar.png";    
 
-    // Tratando se o medicamento tem uma promoção ativa.
+    // Checking if the drug has active promotion
     if(this.data.promotion) {
       this.price = (this.data.price - Number(this.data.price * this.data.promotion)/100).toFixed(2)
     } else {
@@ -48,14 +48,15 @@ export class ModalDataPage implements OnInit {
     await this.modalControll.dismiss();
   }
 
+  // Make a medical appointment function
   async mkAppointment(data) {
-    console.log(data)
     await this.presentLoading();
     await this.appoitmentService.addAppointment(this.collectionId, data);
     await this.loading.dismiss();
     await this.presentToast("Consulta marcada com sucesso!");
   }
 
+  // Buy a drug function
   async buyPill(data) {
     await this.presentLoading();
     const newData = {...data, amount: 777};

@@ -23,23 +23,25 @@ export class FilterPillsComponent implements OnInit {
     this.popover.dismiss();
   }
 
-  // Select the specialty of doctor
+  // Select the pill
   setPillName(event) {
     let data = event.target.value;
     this.pillName = data;
   }
 
-  // Select the price of appointment
+  // Select the price of pill
   setPrice(event) {
     let data = event.target.value;
     this.price = data >= 10 && data;
   }
 
+  // Select the amount of pill
   setAmount(event){
     let data = event.target.value;
     this.amount = data > 1 && data;
   }
 
+  // Closing the filter and passing the data
   setFilter() {
     const data = {
       pillName: this.pillName != undefined && this.pillName,
