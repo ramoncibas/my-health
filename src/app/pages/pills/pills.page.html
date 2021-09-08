@@ -9,10 +9,19 @@
   </div>
 
   <ion-toolbar>
-    <ion-searchbar placeholder="Buscar por Medicamentos" [disabled]="pills.length ? false : true"
-      (ionInput)="searchByName($event)" [debounce]="250" showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar 
+      placeholder="Buscar por Medicamentos" 
+      [disabled]="pills.length ? false : true"
+      (ionInput)="searchByName($event)" 
+      [debounce]="250" 
+      showCancelButton="focus">
+    </ion-searchbar>
 
-    <ion-button [disabled]="pills.length ? false : true" (click)="filterData()" slot="end" fill="clear">
+    <ion-button 
+      [disabled]="pills.length ? false : true" 
+      (click)="filterData()" 
+      slot="end" 
+      fill="clear">
       <ion-icon slot="icon-only" name="filter"></ion-icon>
     </ion-button>
   </ion-toolbar>

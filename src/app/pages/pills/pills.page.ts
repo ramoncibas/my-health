@@ -30,16 +30,14 @@ export class PillsPage implements OnInit {
 
   constructor(
     public popoverController: PopoverController,
-    private pillService: PillService
+    private pillService: PillService,
   ) {
     this.pillSubscription = this.pillService.getAllPills().subscribe(data => {
       this.pills = data;
     })
   }
 
-  ngOnInit() {
-    console.log(this.pills)
-  }
+  ngOnInit() {}
   
   // Destroy listen
   ngOnDestroy() {

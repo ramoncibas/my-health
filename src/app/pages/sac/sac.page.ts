@@ -3,7 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 
 import { ModalChatPage } from '../../components/Modals/modal-chat/modal-chat.page';
 
@@ -25,8 +25,7 @@ export class SacPage implements OnInit {
   constructor(
     private actionSheetController: ActionSheetController,
     private modalControll: ModalController,
-    private socialSharing: SocialSharing,
-    private navCtrl: NavController
+    private socialSharing: SocialSharing,    
   ) { }
 
   ngOnInit() { }
@@ -40,7 +39,7 @@ export class SacPage implements OnInit {
           text: 'WhatsApp',
           icon: 'logo-whatsapp',
           handler: () => {
-            this.socialSharing.shareViaWhatsAppToReceiver("11982275226","Olá! Estou precisando de Ajuda!").then(() => {
+            this.socialSharing.shareViaWhatsAppToReceiver("+55","Olá! Estou precisando de Ajuda!").then(() => {
               console.log('WhatsApp clicked');
             }).catch(console.log)
           },
