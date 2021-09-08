@@ -63,16 +63,30 @@
         </ion-item-options>
 
         <ion-item lines="none">
-          <ion-label>
+          <ion-label *ngIf="item.promotion; else doctor_template">
             <ion-avatar *ngIf="item.picture">
               <img [src]="item.picture" />
             </ion-avatar>
             <h1>{{ item.name }}</h1>
             <h2>{{ item.about || item.description }}</h2>
-            <h4>Marca: {{ item.brand }}</h4>
-            <h4>{{ item.price }}</h4>
-            <p>{{ item.createdAt.seconds*1000 |  date:"dd-MM-YYYY" }}</p>
+            <h4>Valor: 
+              <span style="text-decoration: line-through">{{item.price}}</span> -
+              {{ (item.price - ((item.price * item.promotion) / 100)).toFixed(2) }}
+            </h4>
+            <p>Data da compra: {{ item.createdAt.seconds*1000 |  date:"dd-MM-YYYY" }}</p>
           </ion-label>
+          
+          <ng-template #doctor_template>
+            <ion-label>
+              <ion-avatar *ngIf="item.picture">
+                <img [src]="item.picture" />
+              </ion-avatar>
+              <h1>{{ item.name }}</h1>
+              <h2>{{ item.description }}</h2>
+              <h3>{{ item.specialty }}</h3>
+              <p>Data da consulta: {{ item.createdAt.seconds*1000 |  date:"dd-MM-YYYY" }}</p>
+            </ion-label>
+        </ng-template>
         </ion-item>
 
         
