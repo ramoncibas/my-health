@@ -2,9 +2,8 @@
   position: relative;
 
   width: 100%;
-  height: 30%;
-
-  background: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  height: 30%;  
+  background: var(--linear-gradient-to-right-primary);
 
   ion-button.backbtn {
     position: absolute;

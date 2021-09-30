@@ -78,6 +78,11 @@
   --ion-box-shadow-container: 5px 5px 10px rgba(144, 140, 140, 0.239), 
                               -5px -5px 10px rgba(131, 130, 130, 0.239);
   --ion-box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 5%);
+
+  --linear-gradient-to-right-primary: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  --linear-gradient-to-left-primary: linear-gradient(to left, #144daa, var(--ion-color-primary));
+  --linear-gradient-to-right-shade: linear-gradient(to right, #144daa, var(--ion-color-primary-shade));
+  --linear-gradient-to-left-shade: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
 }
 
 // @media (prefers-color-scheme: dark) {

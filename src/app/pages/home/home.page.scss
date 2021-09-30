@@ -1,7 +1,8 @@
 .card-background {
   width: 100%;
   height: 20%;
-  background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+  // background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+  background: var(--linear-gradient-to-left-shade);
 }
 
 .user-card {
@@ -16,8 +17,8 @@
 
   border-radius: 10px;
   box-shadow: inset 0 0 2px #cecece;
-
-  background: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  
+  background: var(--linear-gradient-to-right-primary);
 
   .about-user {
     height: 100%;

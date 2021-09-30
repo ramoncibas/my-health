@@ -2,8 +2,8 @@
     position: relative;
   
     width: 100%;
-    height: 40%;
-    background: linear-gradient(to left, #144daa, var(--ion-color-primary-shade));
+    height: 40%;    
+    background: var(--linear-gradient-to-left-shade);
   
     ion-button {
       position: absolute;

@@ -1,12 +1,9 @@
 .appointment-background {
   position: relative;
-
   width: 100%;
   height: 30%;
-
-  z-index: 1;
-
-  background: linear-gradient(to right, #144daa, var(--ion-color-primary));
+  background: var(--linear-gradient-to-right-primary);
+  z-index: 1;  
 
   ion-button.backbtn {
     position: absolute;
