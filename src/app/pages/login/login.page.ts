@@ -51,11 +51,11 @@ export class LoginPage implements OnInit {
       let message: string;
       switch (error.code) {
         case 'auth/invalid-email':
-          message = 'E-mail incorreto!'
+          message = 'E-mail ou Senha incorreto!'
           break;
 
         case 'auth/wrong-password':
-          message = 'Senha incorreta!'
+          message = 'E-mail ou Senha incorreta!'
           break;
 
         case 'auth/user-not-found':
@@ -65,7 +65,6 @@ export class LoginPage implements OnInit {
         default:
           break;
       }
-      console.log(error);
       this.presentToast(message);
     } finally {
       // Hiding the loading
@@ -103,7 +102,6 @@ export class LoginPage implements OnInit {
         default:
           break;
       }
-      console.log(error);
       this.presentToast(message);
     } finally {
       // Hiding the loading
