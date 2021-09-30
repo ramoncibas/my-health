@@ -37,8 +37,6 @@ export class HealthServicesPage implements OnInit {
       this.disableMap();
 
       if(this.connectivityService.isOnLine()){
-        console.log("online, loading map");
-
         //Load the SDK
         window['mapInit'] = () => {
           this.initMap();
@@ -59,11 +57,11 @@ export class HealthServicesPage implements OnInit {
     }
     else {
       if (this.connectivityService.isOnLine()) {
-        console.log("Showing Map");
+        //Showing Map
         this.initMap();
         this.enableMap();
       } else {
-        console.log("Disabling Map");
+        //Disabling Map
         this.disableMap();
       }
     }
@@ -84,13 +82,11 @@ export class HealthServicesPage implements OnInit {
     });
   }
 
-  disableMap(){
-    console.log("disable map");
-  }
+  //Disable map
+  disableMap(){}
 
-  enableMap(){
-    console.log("enable map");
-  }  
+  //Enable map
+  enableMap(){}
 
   addConnectivityListeners() {
     let onOnline = () => {
@@ -113,6 +109,4 @@ export class HealthServicesPage implements OnInit {
     document.addEventListener("online", onOnline, false);
     document.addEventListener("offline", onOffline, false);
   }
-
-  // map - https://talkjs.com/build/ionic-chat/?utm_source=google&utm_medium=ppc&utm_campaign=frameworks&utm_term=ionic&gclid=EAIaIQobChMI4Jqw7sve8QIVVgWRCh022gFxEAAYASAAEgJ34PD_BwE
 }

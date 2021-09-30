@@ -42,7 +42,6 @@ export class AuthService {
       }).then(() => {
         this.currentUser = newUserUpdated;
       })
-      console.log("Changed", newUserUpdated);
     });
 
     // Adding User Data to CloudFirestore

@@ -33,9 +33,7 @@ export class MyAppointmentPage implements OnInit {
     })
   }
 
-  ngOnInit() {
-    console.log(this.data)
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     if(this.dataSubscription) this.dataSubscription.unsubscribe();

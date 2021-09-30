@@ -25,13 +25,11 @@ export class FilterDoctorsComponent implements OnInit {
 
   closePopover() {
     this.popover.dismiss();
-    console.log(this.date)
   }
 
   // Select the specialty of doctor
   setSpecialty(event) {
     let data = event.target.value;
-    console.log(data)
     this.specialty = data;
   }
 
