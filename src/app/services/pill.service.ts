@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { Pill } from '../interfaces/pills';
 import { UserHealth } from '../interfaces/user-health';
+
+interface Params {
+  type?: any;
+  price?: any;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +18,7 @@ import { UserHealth } from '../interfaces/user-health';
 export class PillService {
   private pillCollection: AngularFirestoreCollection<Pill>;
   private userHealthCollection: AngularFirestoreCollection<UserHealth>;
-
+  
   constructor(
     private afs: AngularFirestore,
   ) {
@@ -37,6 +42,31 @@ export class PillService {
           });
         })
       );
+  }
+
+  /**
+   * Get Pills by Params
+   * @param params type and price of pills
+   * @returns pills accordingly of params("filter")
+   */
+  getPillByParams(params: Params): Observable<Pill[]> {
+    let { type, price } = params;
+
+    return this.getAllPills().pipe(
+      switchMap(() => {
+        return this.afs
+          .collection('pills', (ref) =>
+            ref
+              .where('type', '==', type)
+              .where('price', '<=', price)
+          )
+          .valueChanges({ idField: 'id' }) as Observable<any>;
+      }),
+      map((item) => {
+        console.log(item, 'map')
+        return item;
+      })
+    );
   }
 
   /**
