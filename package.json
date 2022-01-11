@@ -31,6 +31,7 @@
     "@ionic/angular": "^5.5.2",
     "@types/google.geolocation": "^0.4.31",
     "@types/googlemaps": "^3.43.3",
+    "cordova-browser": "6.0.0",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-x-socialsharing": "^6.0.3",
     "firebase": "^8.3.1",
@@ -47,6 +48,7 @@
     "@angular/language-service": "~11.2.0",
     "@capacitor/cli": "2.4.7",
     "@ionic/angular-toolkit": "^3.1.1",
+    "@ionic/lab": "3.2.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -89,7 +91,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
