@@ -5,14 +5,15 @@
 
   <ion-item>
     <ion-label>
-      <h2>Nome:</h2>
-      <ion-chip *ngIf="pillName">
-        <ion-label>{{ pillName }}</ion-label>
+      <h2>Tipo de Medicamento:</h2>
+      <ion-chip *ngIf="pillType">
+        <ion-label>{{ pillType }}</ion-label>
         <ion-icon name="close"></ion-icon>
       </ion-chip>
     </ion-label>
-    <ion-select ngDefaultControl [(ngModel)]="pillName" (ionChange)="setPillName($event)">
-      <ion-select-option *ngFor="let item of data" [value]="item.value">{{ item.name }}</ion-select-option>
+    
+    <ion-select ngDefaultControl [(ngModel)]="pillType" (ionChange)="setPillType($event)">
+      <ion-select-option *ngFor="let item of data" [value]="item.value">{{ item.type }}</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -40,7 +41,7 @@
       </ion-chip>
     </div>
   </ion-item>
-
+<!-- 
   <ion-item>
     <div class="container amount">
     <ion-label>Quantidade:</ion-label>
@@ -64,7 +65,7 @@
       <ion-icon name="close"></ion-icon>
     </ion-chip>
     </div>
-  </ion-item>
+  </ion-item> -->
 
   <ion-buttons class="ion-justify-content-center">
     <ion-button (click)="closePopover()" color="danger">Cancelar</ion-button>

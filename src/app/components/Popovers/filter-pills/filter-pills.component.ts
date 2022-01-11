@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { PopoverController } from '@ionic/angular';
 
 @Component({
@@ -7,26 +10,34 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./filter-pills.component.scss'],
 })
 
+@NgModule({
+  imports: [CommonModule, FormsModule, BrowserModule],
+  declarations: [FilterPillsComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
+})
+
 export class FilterPillsComponent implements OnInit {
-  private pillName: any;
+  private pillType: any;
   private price: any = 10;
-  private amount: any = 1;
+  // private amount: any = 1;
   private data: any = [];
-  
+
   constructor(
     private popover: PopoverController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   closePopover() {
     this.popover.dismiss();
   }
 
   // Select the pill
-  setPillName(event) {
+  setPillType(event) {
     let data = event.target.value;
-    this.pillName = data;
+    this.pillType = data;
   }
 
   // Select the price of pill
@@ -36,18 +47,17 @@ export class FilterPillsComponent implements OnInit {
   }
 
   // Select the amount of pill
-  setAmount(event){
-    let data = event.target.value;
-    this.amount = data > 1 && data;
-  }
+  // setAmount(event) {
+  //   let data = event.target.value;
+  //   this.amount = data > 1 && data;
+  // }
 
   // Closing the filter and passing the data
   setFilter() {
     const data = {
-      pillName: this.pillName != undefined && this.pillName,
-      price: this.price != undefined && this.price,
-      amount: this.amount != undefined && this.amount,      
+      type: this.pillType != undefined && this.pillType,
+      price: this.price != undefined && this.price
     };
-    this.popover.dismiss(data);        
+    this.popover.dismiss(data);
   }
 }
