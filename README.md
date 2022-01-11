@@ -1,6 +1,12 @@
 <h1 align="center"> 
-	My Health
+	My Health  
 </h1>
+
+<div display="flex" max-width="400px">  
+  <img src="https://user-images.githubusercontent.com/63371945/141713972-5b5a9013-5fb4-475a-9eb8-e1fe0ff58e6b.gif" alt="Application"  width="300" height="620">  
+  <img src="https://user-images.githubusercontent.com/63371945/141711273-8a40d1ee-a9c5-413a-ad68-0215ce417658.gif" alt="Product History"  width="300" height="620">    
+  <img src="https://i.imgur.com/jzIAb9w.gif" alt="ChatBox"  width="300" height="620">  
+<div>
 
 <p align="center">
  <a href="#about">About</a> • 
