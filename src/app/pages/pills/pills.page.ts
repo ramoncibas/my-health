@@ -65,10 +65,13 @@ export class PillsPage implements OnInit {
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,
+      componentProps: {data: this.pills}
     });
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
-    console.log(data);
+    this.pillService.getPillByParams(data).subscribe(data => {
+      this.pills = data;
+    });
   }
 }

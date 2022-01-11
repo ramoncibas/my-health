@@ -19,8 +19,8 @@ import { FilterDoctorsComponent } from 'src/app/components/Popovers/filter-docto
 })
 @NgModule({
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     BrowserModule
   ],
   declarations: [ListItemsComponent, FilterDoctorsComponent],
@@ -29,27 +29,27 @@ export class MedicalAppointmentPage implements OnInit {
   private doctors = new Array<Doctor>();
   private doctorsSubscription: Subscription;
 
-  constructor( 
-    public popoverController: PopoverController,  
+  constructor(
+    public popoverController: PopoverController,
     private doctorsService: DoctorService,
   ) {
-    this.doctorsSubscription = this.doctorsService.getDoctors().subscribe(data => {
+    this.doctorsSubscription = this.doctorsService.getAllDoctors().subscribe(data => {
       this.doctors = data;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Destroy listen
   ngOnDestroy() {
     this.doctorsSubscription.unsubscribe();
   }
-  
+
   // Filter by name
-  searchByName(event:any) {
+  searchByName(event: any) {
     const query = event.target.value.toLowerCase();
     const items = Array.from(document.querySelector("ion-list").children as HTMLCollectionOf<HTMLElement>);
-    
+
     requestAnimationFrame(() => {
       items.forEach(item => {
         console.log(item.textContent)
@@ -70,6 +70,10 @@ export class MedicalAppointmentPage implements OnInit {
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
+
+    this.doctorsService.getDoctorsByFilter(data).subscribe(data => {
+      this.doctors = data;
+    })
     console.log(data);
   }
 }
