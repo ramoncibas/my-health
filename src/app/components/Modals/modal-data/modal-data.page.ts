@@ -16,7 +16,6 @@ export class ModalDataPage implements OnInit {
 
   private price;
   private loading: any;
-  collectionId = null;
 
   constructor(
     private loadingControll: LoadingController,
@@ -25,11 +24,7 @@ export class ModalDataPage implements OnInit {
     private appoitmentService: AppointmentService,
     private pillsService: PillService,
     private userHealthService: UserHealthService
-  ) {
-    this.collectionId = this.userHealthService.getCurrentUserDocument().subscribe((data) => {
-      this.collectionId = data.id;
-    });
-  }
+  ) {}
 
   ngOnInit() {
     // Checking if the doctor has a photo
@@ -44,24 +39,34 @@ export class ModalDataPage implements OnInit {
     }
   }
 
+  async getCurrentId() {
+    let res;
+    this.userHealthService.getCurrentUserDocument().subscribe((data) => {
+      return res = data.id;
+    });
+    return res;
+  }
+
   async closeModal() {
     await this.modalControll.dismiss();
   }
 
   // Make a medical appointment function
   async mkAppointment(data) {
+    const collectionId = await this.getCurrentId();
     await this.presentLoading();
-    await this.appoitmentService.addAppointment(this.collectionId, data);
+    await this.appoitmentService.addAppointment(collectionId, data);
     await this.loading.dismiss();
     await this.presentToast("Consulta marcada com sucesso!");
   }
 
   // Buy a drug function
   async buyPill(data) {
+    const collectionId = await this.getCurrentId();
     await this.presentLoading();
     const newData = {...data, amount: 777};
 
-    await this.pillsService.buyPills(this.collectionId, newData);
+    await this.pillsService.buyPills(collectionId, newData);
     await this.loading.dismiss();
     await this.presentToast("Medicamento comprado com sucesso!");
   }
