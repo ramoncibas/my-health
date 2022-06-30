@@ -20,11 +20,12 @@ export class AppointmentService {
   
   /**   
    * Add Appointment to database
-   * @param collectionId id of collection to update
+   * @param collectionId id of collection to add
    * @param appointment data from the user's medical appointment
    */
   addAppointment(collectionId: string, appointment: Appointment) {
     const currentUser = this.afh.currentUser.uid;
+    
     return this.userHealthCollection.doc(collectionId).ref.update({
       check_up: firebase.default.firestore.FieldValue.arrayUnion({
         userUid: currentUser,

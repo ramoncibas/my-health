@@ -14,6 +14,7 @@ export class AuthService {
     private afs: AngularFirestore,
   ) {
     this.afAuth.onAuthStateChanged(async (user) => {
+      console.log(user)
       if(user !== null) return this.currentUser = user;
     });
   }

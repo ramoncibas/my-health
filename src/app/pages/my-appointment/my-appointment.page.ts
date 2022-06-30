@@ -14,7 +14,7 @@ import { UserHealthService } from 'src/app/services/user-health.service';
 })
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     BrowserModule
   ],
@@ -23,7 +23,7 @@ import { UserHealthService } from 'src/app/services/user-health.service';
 export class MyAppointmentPage implements OnInit {
   public data;
   private dataSubscription: Subscription;
-  
+
   constructor(
     private modalControll: ModalController,
     private userService: UserHealthService
@@ -33,34 +33,35 @@ export class MyAppointmentPage implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnDestroy() {
-    if(this.dataSubscription) this.dataSubscription.unsubscribe();
+    if (this.dataSubscription) this.dataSubscription.unsubscribe();
   }
-  
+
   async showModal(type, data) {
+    console.log(type, data)
     let title: string;
     switch (type) {
       case 'pills':
-        title = "Meus Medicamentos";        
-      break;
+        title = "Meus Medicamentos";
+        break;
       case 'vaccine':
-        title = "Minhas Vacinas";        
-      break;
+        title = "Minhas Vacinas";
+        break;
       case 'check_up':
         title = "Meus Exames";
-      break;
+        break;
       case 'professionals':
-        title = "Meus Profissionais";        
-      break;
+        title = "Meus Profissionais";
+        break;
       default:
         break;
     }
     await this.presentModal(data, title);
   }
 
-  async presentModal( data:any, title:string) {
+  async presentModal(data: any, title: string) {
     const modal = await this.modalControll.create({
       component: ModalMyHealthPage,
       cssClass: 'my-custom-class',

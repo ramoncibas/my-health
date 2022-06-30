@@ -19,8 +19,8 @@ import { PopoverController } from '@ionic/angular';
 })
 
 export class FilterPillsComponent implements OnInit {
-  private pillType: any;
-  private price: any = 10;
+  private pillType: string;
+  private price: number = 10;
   // private amount: any = 1;
   private data: any = [];
 

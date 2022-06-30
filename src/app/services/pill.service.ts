@@ -8,8 +8,8 @@ import { Pill } from '../interfaces/pills';
 import { UserHealth } from '../interfaces/user-health';
 
 interface Params {
-  type?: any;
-  price?: any;
+  type?: string;
+  price?: number;
 }
 
 @Injectable({
@@ -110,6 +110,7 @@ export class PillService {
    * @param {Pill} pill drug information
    */
   pillsInsert(pill: Pill) {
+    // Adicionar o Tipo do medicamento, para facilitar no filtro da pagina "pills"
     return this.pillCollection.add({
       name: pill.name,
       description: pill.description,
@@ -117,6 +118,7 @@ export class PillService {
       picture: pill.picture,
       brand: pill.brand,
       promotion: pill.promotion,
+      // type: pill.type,
       createdAt: firebase.default.firestore.Timestamp.now(),
     });
   }

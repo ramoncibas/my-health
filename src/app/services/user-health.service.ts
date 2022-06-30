@@ -24,7 +24,7 @@ export class UserHealthService {
    */
   getCurrentUserDocument() {
     let uid = this.authService.currentUser.uid;
-
+        
     return this.getAllDoc().pipe(
       switchMap(() => {
         return this.afs
@@ -32,6 +32,7 @@ export class UserHealthService {
           .valueChanges({ idField: 'id' }) as Observable<UserHealth[]>;
       }),
       map((item) => {
+        console.log(item)
         return item[0];
       })
     );
