@@ -1,12 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { PopoverController } from '@ionic/angular';
-
-import { Specialty, Price } from './filter-list';
+import { Price, Specialty } from './filter-list';
 
 @Component({
   selector: 'app-filter-doctors',
   templateUrl: './filter-doctors.component.html',
   styleUrls: ['./filter-doctors.component.scss'],
+})
+
+@NgModule({
+  imports: [CommonModule, FormsModule, BrowserModule],
+  declarations: [FilterDoctorsComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 
 export class FilterDoctorsComponent implements OnInit {

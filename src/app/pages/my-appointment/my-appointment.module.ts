@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +16,9 @@ import { ModalMyHealthPage } from '../../components/Modals/modal-my-health/modal
     IonicModule,
     MyAppointmentPageRoutingModule
   ],
-  declarations: [MyAppointmentPage, ModalMyHealthPage]
+  declarations: [MyAppointmentPage, ModalMyHealthPage],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class MyAppointmentPageModule {}

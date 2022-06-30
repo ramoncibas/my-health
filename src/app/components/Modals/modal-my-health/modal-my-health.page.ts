@@ -4,6 +4,8 @@ import { ActionSheetController, LoadingController, ModalController } from '@ioni
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PillService } from 'src/app/services/pill.service';
 import { UserHealthService } from 'src/app/services/user-health.service';
+
+import { Specialty } from "src/app/components/Popovers/filter-doctors/filter-list"
 @Component({
   selector: 'app-modal-my-health',
   templateUrl: './modal-my-health.page.html',
@@ -30,7 +32,21 @@ export class ModalMyHealthPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  // Filtrar a especialidade do doutor, fazer um for para que visualmente aparece o "nome" da especialidade, e não o "value"
+  ngOnInit() {
+    const {specialty} = this.data[0]
+  
+    // Change specialty
+    if (specialty) {
+      for (let item of Specialty) {
+        for(let data of specialty){
+          if(item === data) {
+            this.data[0].specialty = item.name;
+          }
+        }        
+      }
+    }
+  }
   
   async closeModal() {
     await this.modalControll.dismiss();
@@ -47,7 +63,6 @@ export class ModalMyHealthPage implements OnInit {
           icon: 'logo-whatsapp',
           handler: () => {
             this.socialSharing.shareViaWhatsAppToReceiver("+55", data).then(() => {
-              console.log('WhatsApp clicked');
             }).catch(console.log)
           },
         },
@@ -76,30 +91,23 @@ export class ModalMyHealthPage implements OnInit {
           text: 'Email',
           icon: 'mail',
           handler: () => {
-            this.socialSharing.shareViaEmail(data, "Help", ["ramon.cibas@hotmail.com"]).then(() => {
-              console.log("Email clicked!");
-            }).catch(console.log);
+            this.socialSharing.shareViaEmail(data, "Help", ["ramon.cibas@hotmail.com"]).catch(console.log);
           },
         },
         {
           text: 'Cancel',
           icon: 'close',
           role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          },
+          handler: () => {},
         },
       ],
     });
     await actionSheet.present();
 
     const { role } = await actionSheet.onDidDismiss();
-    console.log(role);
   }
 
-  async deleteItem(data) {
-    console.log(data);
-  }
+  async deleteItem(data) {}
 
   // Clean all data
   async cleanHistory(data) {

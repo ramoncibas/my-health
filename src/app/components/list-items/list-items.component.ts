@@ -1,9 +1,8 @@
-import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, NgModule, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ModalController, IonInfiniteScroll } from '@ionic/angular';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { ModalDataPage } from '../Modals/modal-data/modal-data.page';
 import { FilterDoctorsComponent } from '../Popovers/filter-doctors/filter-doctors.component';
 
@@ -16,6 +15,9 @@ import { FilterDoctorsComponent } from '../Popovers/filter-doctors/filter-doctor
 @NgModule({
   imports: [CommonModule, FormsModule, BrowserModule],
   declarations: [FilterDoctorsComponent, ModalDataPage, ListItemsComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 
 export class ListItemsComponent implements OnInit {
